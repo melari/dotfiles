@@ -113,3 +113,4 @@ alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias dbreset="rake db:schema:load && rake db:test:clone"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source ~/.profile # Makes bundle install work for some reason.
