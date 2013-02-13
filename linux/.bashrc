@@ -1,15 +1,15 @@
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#etc/xdg/awesome/rc.lua
 
-eval "$(rbenv init -)"
 
-# custom directories to our executable PATH
+
+#Add custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
-export PATH="/usr/local/mysql/bin/:$PATH"
 
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
+
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -22,16 +22,15 @@ GREEN="\[\033[0;32m\]"
 BLUE="\[\033[0;34m\]"
 PURPLE="\[\033[0;35m\]"
 AQUA="\[\033[0;36m\]"
-WHITE="\[\033[0;37m\]"
-BROWN="\[\033[0;33m\]"
+BROWN="\[\033[0;33m\]" 
+WHITE="\[\033[0;37m\]" 
 
 # $COLOR for different colors
 # \u for username
 # \w for working directory
 # \$(__git_ps1) for git branch
-# ➜  in case you want the character sometime..
-#PS1="$GREEN\u: \w$AQUA\$(__git_ps1)$WHITE $ "
-PS1="$GREEN\w$BROWN|$AQUA\$(parse_git_branch)$BROWN:: $WHITE"
+# ➜ in case you want the character sometime..
+PS1="$GREEN\w$BROWN|$AQUA\$(parse_git_branch)$BROWN::$WHITE "
 
 
 # If not running interactively, don't do anything
@@ -54,6 +53,7 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -80,18 +80,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# enable autocompletion for git
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-
 
 
 # Custom Alias #
 alias t='gnome-terminal &'
 alias chrome='chromium-browser &>/dev/null &'
-alias l='ls -alFG'
-alias ls='ls -G'
+alias l='ls -alF'
 alias ..='cd ..'
 alias resolution="xdpyinfo | grep 'dimensions:'"
 alias search="gnome-search-tool"
@@ -99,32 +93,23 @@ alias image="fotoxx"
 alias ipconfig="route -n"
 alias s="gnome-open ~/Pictures/Schedule.png"
 alias deb="sudo dpkg -i"
-alias resource="source ~/.bash_profile"
-alias bashrc="vim ~/.bash_profile && resource"
+alias steam="steam steam://open/games &"
+alias subl="subl . &"
+alias resource="source ~/.bashrc"
+alias bashrc="vim ~/.bashrc && resource"
 
 # Git Alias
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
 alias co='git checkout'
-alias st="git status"
-alias branch="git branch --color"
-alias allbranch="git branch -av --color"
+alias branch='git branch -a --color'
 alias diff="git diff --color"
 alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
-
+alias st="git status"
+alias allbranch="git branch -av --color"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
+alias dbreset="rake db:schema:load && rake db:test:clone"
 
-## Ruby GC
-
-export RUBY_HEAP_MIN_SLOTS=800000
-export RUBY_HEAP_FREE_MIN=100000
-export RUBY_HEAP_SLOTS_INCREMENT=300000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=79000000
-
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
