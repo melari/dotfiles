@@ -111,3 +111,5 @@ alias allbranch="git branch -av --color"
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias dbreset="rake db:schema:load && rake db:test:clone"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
