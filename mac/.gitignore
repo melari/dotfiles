@@ -1,2 +1,6 @@
 *.swp
 *.gem
+.DS_Store
+.svn
+.rvmrc
+*.gem
