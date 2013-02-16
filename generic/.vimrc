@@ -4,6 +4,9 @@ runtime! debian.vim
 " Color schemes are located in ~/.vim/colors/
 if has("syntax")
   syntax on
+  if $COLORTERM == 'gnome-terminal'
+    set term=gnome-256color " make sure to `sudo apt-get install ncurses-term` for this to work.
+  endif
   colorscheme railscasts
   set background=dark
 endif
