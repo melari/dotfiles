@@ -22,6 +22,9 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+" Enable matchit plugin (required for ruby text-object)
+runtime macros/matchit.vim
+
 set showcmd		 " Show (partial) command in status line.
 set showmatch	 " Show matching brackets.
 set ignorecase " Do case insensitive matching
