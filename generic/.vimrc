@@ -43,11 +43,22 @@ set hls           " Highlight Search
 set is
 
 
-:vnoremap . :norm.<CR>          " Allow for using dot command in insert mode
-map ` :NERDTreeToggle<CR>       " Use ` to toggle NERD Tree Sidebar
-map <leader><leader> :nohl<CR>  " Use \\ to clear search highlighting
-nmap <F1> <ESC>                 " Remap F1 to ESC to prevent it from opening help
+:vnoremap . :norm.<CR>            " Allow for using dot command in insert mode     
+map ` :NERDTreeToggle<CR>         " Use ` to toggle NERD Tree Sidebar
+map <leader><leader> :nohl<CR>    " Use \\ to clear search highlighting
+nmap <F1> <ESC>                   " Remap F1 to ESC to prevent it from opening help
+nmap <leader>ws :%s/\s\+$//g<CR><c-o>  " Remove all trailing whitespace
+nmap ~ :FufCoverageFile<CR>
+nmap <CR> :!
+nmap <leader>diff :!git diff --color
+nmap <leader>blame :!git blame %
 
 " Highlight trailing whitespace and all tabs
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$\|\t/
+
+" Filetype mappings
+autocmd BufNewFile,BufRead *.htm.erb set filetype=html
+autocmd BufNewFile,BufRead *.html.erb set filetype=html
+autocmd BufNewFile,BufRead *.coffee.erb set filetype=coffee
+autocmd BufNewFile,BufRead Gemfile set filetype=ruby
