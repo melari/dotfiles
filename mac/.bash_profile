@@ -1,11 +1,12 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 # custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
 export PATH="/usr/local/mysql/bin/:$PATH"
+export SEE=1
 
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
@@ -16,9 +17,9 @@ parse_git_branch() {
 }
 
 #Setup some basic colors (used in setting PS1)
-RED="\[\033[0;31m\]" 
-YELLOW="\[\033[0;33m\]" 
-GREEN="\[\033[0;32m\]" 
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
 BLUE="\[\033[0;34m\]"
 PURPLE="\[\033[0;35m\]"
 AQUA="\[\033[0;36m\]"
@@ -31,7 +32,11 @@ BROWN="\[\033[0;33m\]"
 # \$(__git_ps1) for git branch
 # ➜  in case you want the character sometime..
 #PS1="$GREEN\u: \w$AQUA\$(__git_ps1)$WHITE $ "
-PS1="$GREEN\w$BROWN|$AQUA\$(parse_git_branch)$BROWN:: $WHITE"
+source ~/.git-completion.sh
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
+
 
 
 # If not running interactively, don't do anything
@@ -93,25 +98,22 @@ alias chrome='chromium-browser &>/dev/null &'
 alias l='ls -alFG'
 alias ls='ls -G'
 alias ..='cd ..'
+alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
+alias gupdate="git checkout master && git pull origin master && git checkout current && git rebase master"
 alias resolution="xdpyinfo | grep 'dimensions:'"
 alias search="gnome-search-tool"
 alias image="fotoxx"
 alias ipconfig="route -n"
 alias s="gnome-open ~/Pictures/Schedule.png"
 alias deb="sudo dpkg -i"
-alias resource="source ~/.bash_profile"
-alias bashrc="vim ~/.bash_profile && resource"
-
-# Git Alias
-alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
-alias lstash-apply="git reset --soft HEAD^ && st"
-alias co='git checkout'
-alias st="git status"
 alias branch="git branch --color"
 alias allbranch="git branch -av --color"
 alias diff="git diff --color"
-alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
-
+alias resource="source ~/.bash_profile"
+alias st="git status"
+alias bashrc="vim ~/.bash_profile && resource"
+alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
+alias lstash-apply="git reset --soft HEAD^ && st"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
