@@ -43,7 +43,9 @@ set hls           " Highlight Search
 set is
 
 
-:vnoremap . :norm.<CR>            " Allow for using dot command in insert mode
+vnoremap . :norm.<CR>            " Allow for using dot command in insert mode
+vnoremap <leader># :norm i#<CR>
+vnoremap <leader>3 :norm x<CR>
 map ` :NERDTreeToggle<CR>         " Use ` to toggle NERD Tree Sidebar
 map <leader><leader> :nohl<CR>    " Use \\ to clear search highlighting
 nmap <F1> <ESC>                   " Remap F1 to ESC to prevent it from opening help
@@ -52,6 +54,8 @@ nmap ~ :FufCoverageFile<CR>
 nmap <CR> :!
 nmap <leader>diff :!git diff --color
 nmap <leader>blame :!git blame %
+nmap <c-l> :vsp<CR><c-p>
+nmap <c-k> :new<CR><c-p>
 
 " Highlight trailing whitespace and all tabs
 :highlight ExtraWhitespace ctermbg=red guibg=red
