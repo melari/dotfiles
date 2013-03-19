@@ -1,0 +1,5 @@
+matcher must be installed for the ctrlP plugin for vim to work properly:
+  Follow instructions from: https://github.com/burke/matcher
+  * clone
+  * make
+  * make install
