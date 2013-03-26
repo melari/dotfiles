@@ -44,6 +44,10 @@ set ic            " Incremental Search
 set hls           " Highlight Search
 set is
 
+" Disable beeping and flashing on errors
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 
 vnoremap . :norm.<CR>            " Allow for using dot command in insert mode
 vnoremap <leader># :norm i#<CR>
