@@ -1,7 +1,5 @@
 #etc/xdg/awesome/rc.lua
 
-
-
 #Add custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
@@ -9,7 +7,6 @@ export PATH=$PATH:~/bin
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
-
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -30,8 +27,10 @@ WHITE="\[\033[0;37m\]"
 # \w for working directory
 # \$(__git_ps1) for git branch
 # ➜ in case you want the character sometime..
-PS1="$GREEN\w$BROWN|$AQUA\$(parse_git_branch)$BROWN::$WHITE "
-
+source ~/.git-completion.sh
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -54,7 +53,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -67,11 +65,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -79,8 +75,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
-
 
 # Custom Alias #
 alias t='gnome-terminal &'
@@ -111,6 +105,7 @@ alias allbranch="git branch -av --color"
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias dbreset="rake db:schema:load && rake db:test:clone"
+
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 source ~/.profile # Makes bundle install work for some reason.
