@@ -53,7 +53,7 @@ vnoremap . :norm.<CR>            " Allow for using dot command in insert mode
 vnoremap <leader># :norm i#<CR>
 vnoremap <leader>3 :norm x<CR>
 map ` :NERDTreeToggle<CR>         " Use ` to toggle NERD Tree Sidebar
-map <leader><leader> :nohl<CR>    " Use \\ to clear search highlighting
+map <leader><leader> :nohl<CR>:set nopaste<CR>    " Use \\ to clear search highlighting and paste mode
 nmap <F1> <ESC>                   " Remap F1 to ESC to prevent it from opening help
 nmap <leader>ws :%s/\s\+$//g<CR><c-o>  " Remove all trailing whitespace
 nmap ~ :FufCoverageFile<CR>
