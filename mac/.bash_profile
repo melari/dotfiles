@@ -16,6 +16,10 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+diff-single() {
+  diff $@^..$@
+}
+
 #Setup some basic colors (used in setting PS1)
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
@@ -99,7 +103,6 @@ alias l='ls -alFG'
 alias ls='ls -G'
 alias ..='cd ..'
 alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
-alias gupdate="git checkout master && git pull origin master && git checkout current && git rebase master"
 alias resolution="xdpyinfo | grep 'dimensions:'"
 alias search="gnome-search-tool"
 alias image="fotoxx"
@@ -114,6 +117,9 @@ alias st="git status"
 alias bashrc="vim ~/.bash_profile && resource"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
+alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d"
+alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
+alias b="bundle exec"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
@@ -130,3 +136,6 @@ alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Enable Boxen's Environment
+source /opt/boxen/env.sh
