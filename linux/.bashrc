@@ -101,6 +101,8 @@ alias diff="git diff --color"
 alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
 alias st="git status"
 alias allbranch="git branch -av --color"
+alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d"
+alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"

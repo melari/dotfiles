@@ -97,35 +97,29 @@ fi
 
 
 # Custom Alias #
-alias t='gnome-terminal &'
-alias chrome='chromium-browser &>/dev/null &'
 alias l='ls -alFG'
 alias ls='ls -G'
 alias ..='cd ..'
-alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
-alias resolution="xdpyinfo | grep 'dimensions:'"
-alias search="gnome-search-tool"
-alias image="fotoxx"
 alias ipconfig="route -n"
-alias s="gnome-open ~/Pictures/Schedule.png"
-alias deb="sudo dpkg -i"
-alias branch="git branch --color"
 alias allbranch="git branch -av --color"
-alias diff="git diff --color"
 alias resource="source ~/.bash_profile"
-alias st="git status"
 alias bashrc="vim ~/.bash_profile && resource"
+
+# Git Alias
+alias branch="git branch --color"
+alias diff="git diff --color"
+alias st="git status"
+alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
 alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d"
 alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
-alias b="bundle exec"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
+alias b="bundle exec"
 
 ## Ruby GC
-
 export RUBY_HEAP_MIN_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
