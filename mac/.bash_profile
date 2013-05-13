@@ -7,6 +7,9 @@ export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
 export PATH="/usr/local/mysql/bin/:$PATH"
 
+# Makes rake test have nice output.
+export REPORTERS=1
+
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
