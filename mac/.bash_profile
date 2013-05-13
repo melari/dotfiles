@@ -19,7 +19,7 @@ parse_git_branch() {
 }
 
 diff-single() {
-  diff $@^..$@
+  git diff $@^..$@ --color
 }
 
 #Setup some basic colors (used in setting PS1)
