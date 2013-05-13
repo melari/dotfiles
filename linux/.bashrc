@@ -12,6 +12,10 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+diff-single() {
+  diff $@^..$@
+}
+
 #Setup some basic colors (used in setting PS1)
 RED="\[\033[0;31m\]" 
 YELLOW="\[\033[0;33m\]" 
