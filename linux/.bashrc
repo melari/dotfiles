@@ -112,5 +112,7 @@ alias gupdate="git checkout master && git fetch && git merge origin/master && bu
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias dbreset="rake db:schema:load && rake db:test:clone"
 
+# Slow down the mouse!
+xinput --set-prop "Saitek Cyborg R.A.T.7 Mouse" "Device Accel Constant Deceleration" 5
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
