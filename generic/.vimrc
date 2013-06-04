@@ -73,6 +73,8 @@ autocmd BufNewFile,BufRead *.html.erb set filetype=html
 autocmd BufNewFile,BufRead *.coffee.erb set filetype=coffee
 autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 
+" Autocompile coffeescript on save
+autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -o htdocs/assets/javascript -c <afile>
 
 "===== matcher ctrlP support ====="
 let g:path_to_matcher = "/usr/local/bin/matcher"
