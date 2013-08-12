@@ -80,7 +80,7 @@ nmap <c-w><DOWN> 40<DOWN>
 autocmd BufNewFile,BufRead *.htm.erb set filetype=html
 autocmd BufNewFile,BufRead *.html.erb set filetype=html
 autocmd BufNewFile,BufRead *.coffee.erb set filetype=coffee
-autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+autocmd BufNewFile,BufRead *Gemfile* set filetype=ruby
 
 " Autocompile coffeescript on save
 autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -o htdocs/assets/javascript -c <afile>
