@@ -62,6 +62,16 @@ nmap <leader>blame :!git blame %
 nmap <c-l> :vsp<CR><c-p>
 nmap <c-k> :new<CR><c-p>
 
+" Better window resizing
+nmap <LEFT> <c-w><
+nmap <RIGHT> <c-w>>
+nmap <UP> <c-w>+
+nmap <DOWN> <c-w>-
+nmap <c-w><LEFT> 40<LEFT>
+nmap <c-w><RIGHT> 40<RIGHT>
+nmap <c-w><UP> 40<UP>
+nmap <c-w><DOWN> 40<DOWN>
+
 " Highlight trailing whitespace and all tabs
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$\|\t/
