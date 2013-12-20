@@ -114,12 +114,14 @@ alias st="git status"
 alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
-alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d"
+alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin"
 alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
+alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
+alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 
 ## Ruby GC
 export RUBY_HEAP_MIN_SLOTS=800000
@@ -129,6 +131,7 @@ export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
 
 alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+alias irc="irssi"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
