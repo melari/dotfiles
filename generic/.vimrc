@@ -81,9 +81,12 @@ autocmd BufNewFile,BufRead *.htm.erb set filetype=html
 autocmd BufNewFile,BufRead *.html.erb set filetype=html
 autocmd BufNewFile,BufRead *.coffee.erb set filetype=coffee
 autocmd BufNewFile,BufRead *Gemfile* set filetype=ruby
+autocmd BufNewFile,BufRead *.g set syntax=antlr3
+autocmd BufNewFile,BufRead *.e set syntax=ruby
 
 " Autocompile coffeescript on save
-autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -o htdocs/assets/javascript -c <afile>
+" Disabled for now. Use the built in tool in Harmony instead.
+"autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -o htdocs/assets/javascript -c <afile>
 
 "===== matcher ctrlP support ====="
 let g:path_to_matcher = "/usr/local/bin/matcher"
