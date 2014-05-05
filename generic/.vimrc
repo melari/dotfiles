@@ -89,7 +89,7 @@ autocmd BufNewFile,BufRead *.e set syntax=ruby
 "autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -o htdocs/assets/javascript -c <afile>
 
 "===== matcher ctrlP support ====="
-let g:path_to_matcher = "/usr/local/bin/matcher"
+let g:path_to_matcher = "~/bin/matcher"
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
 
