@@ -5,7 +5,7 @@
 # custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
-export PATH="/usr/local/mysql/bin/:$PATH"
+export PATH="/usr/local/mysql/bin:$PATH"
 
 # Makes rake test have nice output.
 export REPORTERS=1
@@ -41,7 +41,7 @@ BROWN="\[\033[0;33m\]"
 source ~/.git-completion.sh
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
-PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
+PS1="$GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
 
 
 
@@ -136,5 +136,5 @@ alias irc="irssi"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### Enable Boxen's Environment
-source /opt/boxen/env.sh
+### Enable Boxen's Environment (deprecated)
+# source /opt/boxen/env.sh
