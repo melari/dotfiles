@@ -123,6 +123,10 @@ alias b="bundle exec"
 alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
 alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 
+# Vagrant Alias
+alias va='cd ~/code/vagrant && vagrant ssh'
+alias vaport='cd ~/code/vagrant && vagrant ssh -- -N -L 3000:localhost:3000'
+
 ## Ruby GC
 export RUBY_HEAP_MIN_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
