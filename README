@@ -9,3 +9,6 @@ The mac and linux PS1 settings require the existance of ~/.git-completion.sh (in
 
 On Mac:
   - If using iterm2 make sure to change preferences > profiles > Terminal > Report Terminal Type to "xterm-256color"
+
+If .gitconfig is not applying the global .gitignore, use the command:
+  $ git config --global core.excludesfile ~/.gitignore
