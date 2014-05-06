@@ -126,6 +126,7 @@ alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 # Vagrant Alias
 alias va='cd ~/code/vagrant && vagrant ssh'
 alias vaport='cd ~/code/vagrant && vagrant ssh -- -N -L 3000:localhost:3000'
+alias vaupdate='cd ~/code/vagrant && git pull origin master && vagrant bundle && vagrant provision'
 
 ## Ruby GC
 export RUBY_HEAP_MIN_SLOTS=800000
