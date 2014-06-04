@@ -8,7 +8,7 @@ if has("syntax")
     set term=gnome-256color " make sure to `sudo apt-get install ncurses-term` for this to work.
   endif
   set background=dark
-  colorscheme solarized
+  colorscheme railscasts
 endif
 
 " Load filetype dependant indentation
