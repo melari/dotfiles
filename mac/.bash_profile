@@ -14,6 +14,11 @@ export REPORTERS=1
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
 
+#Maven config
+export M2_HOME="/home/vagrant/bin/apache-maven-3.2.1"
+export M2="$M2_HOME/bin"
+export PATH=$M2:$PATH
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
@@ -41,7 +46,12 @@ BROWN="\[\033[0;33m\]"
 source ~/.git-completion.sh
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
-PS1="$GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
+
+# Preferred PS1 (has branch status built in):
+PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
+
+# Backup if __git_ps1 is not working for some reason:
+#PS1="$RED[VAGRANT] $GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
 
 
 
@@ -70,9 +80,6 @@ shopt -s checkwinsize
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -109,24 +116,21 @@ alias bashrc="vim ~/.bash_profile && resource"
 
 # Git Alias
 alias branch="git branch --color"
-alias diff="git diff --color"
+alias diff="git diff -v --color"
 alias st="git status"
 alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
 alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin"
 alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
+alias ci="git checkout caleb-temp-test && git checkout - && git branch -f caleb-temp-test HEAD && git checkout - && git push origin caleb-temp-test -f && git checkout -"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
 alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
 alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
-
-# Vagrant Alias
-alias va='cd ~/code/vagrant && vagrant ssh'
-alias vaport='cd ~/code/vagrant && vagrant ssh -- -N -L 3000:localhost:3000'
-alias vaupdate='cd ~/code/vagrant && git pull origin master && vagrant bundle && vagrant provision'
+alias test='b rake test TEST='
 
 ## Ruby GC
 export RUBY_HEAP_MIN_SLOTS=800000
