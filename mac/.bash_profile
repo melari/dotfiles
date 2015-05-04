@@ -1,6 +1,6 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-#eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 
 # custom directories to our executable PATH
 export PATH=$PATH:~/scripts
@@ -43,7 +43,10 @@ BROWN="\[\033[0;33m\]"
 # \$(__git_ps1) for git branch
 # ➜  in case you want the character sometime..
 #PS1="$GREEN\u: \w$AQUA\$(__git_ps1)$WHITE $ "
-source ~/.git-completion.sh
+
+# Use built in OSX git completion file instead of the one from dotfiles repo.
+source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 
