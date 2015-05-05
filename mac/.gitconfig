@@ -4,6 +4,6 @@
 [credential]
 	helper = osxkeychain
 [core]
-  excludesfile = /Users/calebsimpson/.gitignore
+	excludesfile = /Users/caleb/.gitignore
 [push]
   default = tracking
