@@ -154,5 +154,9 @@ alias irc="irssi"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### Enable Boxen's Environment (deprecated)
-# source /opt/boxen/env.sh
+### Command Notes:
+# In ssh:
+# screen = open a detachable shell
+# screen -r  = reopen your last screen
+# <c-a><c-d> (while in a screen) = detact with killing
+# <c-d> (while in a screen) = kill screen (???)
