@@ -116,6 +116,7 @@ alias ipconfig="route -n"
 alias allbranch="git branch -av --color"
 alias resource="source ~/.bash_profile"
 alias bashrc="vim ~/.bash_profile && resource"
+alias notes="vim ~/notes"
 
 # Git Alias
 alias branch="git branch --color"
@@ -134,6 +135,11 @@ alias b="bundle exec"
 alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
 alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 alias test='b rake test TEST='
+alias cop='b rubocop'
+
+# Vagrant Alias
+alias vap='cd ~/code/vagrant && vagrant up --provision'
+alias va='cd ~/code/vagrant && vagrant ssh'
 
 ## Ruby GC
 export RUBY_HEAP_MIN_SLOTS=800000
