@@ -142,7 +142,7 @@ alias vap='cd ~/code/vagrant && vagrant up --provision'
 alias va='cd ~/code/vagrant && vagrant ssh'
 
 ## Ruby GC
-export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_GC_HEAP_INIT_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
