@@ -1,5 +1,3 @@
-#etc/xdg/awesome/rc.lua
-
 #Add custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
@@ -7,6 +5,9 @@ export PATH=$PATH:~/bin
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
+
+# Makes rake test have nice output.
+export REPORTERS=1
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -35,6 +36,9 @@ source ~/.git-completion.sh
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
+
+# Backup if __git_ps1 is not working for some reason:
+#PS1="$RED[VAGRANT] $GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -81,35 +85,33 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Custom Alias #
-alias t='gnome-terminal &'
-alias chrome='chromium-browser &>/dev/null &'
-alias l='ls -alF'
+alias l='ls -alFG'
+alias ls='ls -G'
 alias ..='cd ..'
-alias resolution="xdpyinfo | grep 'dimensions:'"
-alias search="gnome-search-tool"
-alias image="fotoxx"
 alias ipconfig="route -n"
-alias s="gnome-open ~/Pictures/Schedule.png"
-alias deb="sudo dpkg -i"
-alias steam="steam steam://open/games &"
-alias subl="subl . &"
-alias resource="source ~/.bashrc"
-alias bashrc="vim ~/.bashrc && resource"
+alias allbranch="git branch -av --color"
+alias resource="source ~/.bash_profile"
+alias bashrc="vim ~/.bash_profile && resource"
+alias notes="vim ~/notes"
+alias open-again="open -n -a"
 
 # Git Alias
+alias branch="git branch --color"
+alias diff="git diff -v --color"
+alias st="git status"
+alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
-alias co='git checkout'
-alias branch='git branch -a --color'
-alias diff="git diff --color"
-alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
-alias st="git status"
-alias allbranch="git branch -av --color"
-alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d"
+alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin"
 alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
+alias ci="git checkout caleb-temp-test && git checkout - && git branch -f caleb-temp-test HEAD && git checkout - && git push origin caleb-temp-test -f && git checkout -"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
-alias dbreset="rake db:schema:load && rake db:test:clone"
+alias b="bundle exec"
+alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
+alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
+alias test='b rake test TEST='
+alias cop='b rubocop'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

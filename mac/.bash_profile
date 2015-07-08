@@ -14,11 +14,6 @@ export REPORTERS=1
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
 
-#Maven config
-export M2_HOME="/home/vagrant/bin/apache-maven-3.2.1"
-export M2="$M2_HOME/bin"
-export PATH=$M2:$PATH
-
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
@@ -117,6 +112,7 @@ alias allbranch="git branch -av --color"
 alias resource="source ~/.bash_profile"
 alias bashrc="vim ~/.bash_profile && resource"
 alias notes="vim ~/notes"
+alias open-again="open -n -a"
 
 # Git Alias
 alias branch="git branch --color"
@@ -137,6 +133,10 @@ alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 alias test='b rake test TEST='
 alias cop='b rubocop'
 
+# Russbot alias
+alias ssh-russbot="ssh russbot-staging"
+alias deploy-russbot="USER=caleb_simpson cap staging deploy" #Add SKIP_LHM=true, to deploy without running LHMs.
+
 # Vagrant Alias
 alias vap='cd ~/code/vagrant && vagrant up --provision'
 alias va='cd ~/code/vagrant && vagrant ssh'
@@ -153,6 +153,9 @@ alias irc="irssi"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+
+alias wintermute="ssh caleb_simpson@wintermute.shopify.io"
 
 ### Command Notes:
 # In ssh:
