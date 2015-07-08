@@ -12,12 +12,11 @@
 "   both the ascii and non-ascii fonts!)
 " * Exuberant ctags must be installed for goto-definition features:
 "    $ brew install ctags-exuberant
+"    Or on linux:
+"    $ sudo apt-get install exuberant-ctags
 " * Ctags need to be manually generated the first time you open a project:
 "    $ ctags -R .
 " * After this is done once, the vim-easytags plugin will keep them up to date.
-" * After vimproc is installed, it requires additional c compiliation:
-"     $ cd ~/.vim/plugged/vimproc
-"     $ make
 "  =============================================================================
 "
 "                        ~~ Handy Command Reference ~~
