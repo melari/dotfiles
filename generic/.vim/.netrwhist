@@ -1,9 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/calebsimpson/workspace/rails/shopify/app'
-let g:netrw_dirhist_2='/Users/calebsimpson/workspace/php/loft/htdocs'
-let g:netrw_dirhist_3='/Users/calebsimpson/workspace/ruby/mppvm'
-let g:netrw_dirhist_4='/Users/calebsimpson/workspace/php/ppm'
-let g:netrw_dirhist_5='/Users/calebsimpson/workspace/rails/shopify'
-let g:netrw_dirhist_6='/Users/caleb/code/ruby/shopify'
-let g:netrw_dirhist_7='/Users/caleb/code/ruby/active_utils/lib'
+let g:netrw_dirhist_cnt =0

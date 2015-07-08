@@ -12,3 +12,12 @@ On Mac:
 
 If .gitconfig is not applying the global .gitignore, use the command:
   $ git config --global core.excludesfile ~/.gitignore
+
+Exuberant ctags must be installed for vim autocomplete features:
+On mac:
+$ brew install ctags-exuberant
+
+Then to generated the ctags, navigate to the project directory and run:
+$ ctags -R .
+
+You can then jump to a definition with <c-]>
