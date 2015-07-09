@@ -12,11 +12,12 @@
 "   both the ascii and non-ascii fonts!)
 " * Exuberant ctags must be installed for goto-definition features:
 "    $ brew install ctags-exuberant
-"    Or on linux:
-"    $ sudo apt-get install exuberant-ctags
 " * Ctags need to be manually generated the first time you open a project:
 "    $ ctags -R .
 " * After this is done once, the vim-easytags plugin will keep them up to date.
+" * After vimproc is installed, it requires additional c compiliation:
+"     $ cd ~/.vim/plugged/vimproc
+"     $ make
 "  =============================================================================
 "
 "                        ~~ Handy Command Reference ~~
@@ -38,6 +39,7 @@
 "   :ToGithub         | Opens the current line in the github repo
 "   :Rename <name>    | Renames the current open file to <name>
 "   :so %             | Source the current buffer
+"   :Gblame           | Show inline blame of current file
 "  =============================================================================
 
 
@@ -68,6 +70,7 @@ Plug 'git@github.com:tonchis/vim-to-github.git'                                "
 Plug 'git@github.com:sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
 Plug 'git@github.com:mhinz/vim-startify.git'                                   " Adds a better start menu (MRU file list)
 Plug 'git@github.com:vim-scripts/Rename.git'                                   " Adds :Rename command
+Plug 'git@github.com:tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 
 call plug#end()
 
