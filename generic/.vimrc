@@ -81,6 +81,7 @@ syntax on
 colorscheme railscasts
 filetype plugin indent on
 set laststatus=2                            " Always show the statusline
+set backspace=2                             " Allow deleting characters not entered during the current insert mode with backspace
 set showcmd                                 " Show partial command in status line
 set showmatch                               " Show matching brackets
 set smartcase                               " Do smart case matching
