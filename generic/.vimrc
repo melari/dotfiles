@@ -2,6 +2,7 @@
 "                       ~~ Installation Instructions ~~
 "
 " * Run :PlugInstall to install all vim extensions listed below.
+" * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
 " * After command-p is installed, it requires some additional c compiliation:
 "     $ cd ~/.vim/plugged/matcher
