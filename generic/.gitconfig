@@ -1,0 +1,9 @@
+[user]
+	name = Caleb Simpson
+	email = caleb.simpson@jadedpixel.com
+[credential]
+	helper = osxkeychain
+[core]
+	excludesfile = /Users/caleb/.gitignore
+[push]
+  default = tracking
