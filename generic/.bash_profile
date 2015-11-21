@@ -1,11 +1,21 @@
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Detect Operating System
+platform='UNKNOWN'
+unamestr=`uname`
+if [[ $unamestr == Darwin* ]]; then
+  platform='osx'
+elif [[ $unamestr == Linux* ]]; then
+  platform='linux'
+fi
 
+# Enable rbenv
+PATH=$PATH:$HOME/.rbenv/bin
 eval "$(rbenv init -)"
 
 # custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
 export PATH="/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
 
 # Makes rake test have nice output.
 export REPORTERS=1
@@ -13,6 +23,9 @@ export REPORTERS=1
 #Force git to use vim when asking for text input (commit messages)
 export GIT_EDITOR="vim"
 export SVN_EDITOR="vim"
+
+# If not running interactively, don't do anything more
+[ -z "$PS1" ] && return
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -38,26 +51,30 @@ BROWN="\[\033[0;33m\]"
 # \$(__git_ps1) for git branch
 # ➜  in case you want the character sometime..
 #PS1="$GREEN\u: \w$AQUA\$(__git_ps1)$WHITE $ "
+# Backup if __git_ps1 is not working for some reason:
+#PS1="$RED[VAGRANT] $GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
 
-# Use built in OSX git completion file instead of the one from dotfiles repo.
-source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
-source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+# Load the git completion file depending on OS.
+if [[ $platform == 'osx' ]]; then
+  source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+  source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+elif [[ $platform == 'linux' ]]; then
+  source ~/.git-completion.sh
+fi
+
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 
 # Preferred PS1 (has branch status built in):
-PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
 
-# Backup if __git_ps1 is not working for some reason:
-#PS1="$RED[VAGRANT] $GREEN\w$BROWN|$AQUA"'$(parse_git_branch "%s")'"$BROWN:: $WHITE"
+if [[ $platform == 'osx' ]]; then
+  PS1="$GREEN\w$BROWN|$AQUA"'$(__git_ps1 "%s")'"$BROWN:: $WHITE"
+elif [[ $platform == 'linux' ]]; then
+  PS1="$BLUE\w$RED|$AQUA"'$(__git_ps1 "%s")'"$RED:: $WHITE"
+fi
 
 
-
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
+# don't put duplicate lines in the history
 HISTCONTROL=ignoredups:ignorespace
 
 # append to the history file, don't overwrite it
@@ -76,32 +93,24 @@ shopt -s checkwinsize
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
-
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 # enable autocompletion for git
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
-
-
 
 # Custom Alias #
 alias l='ls -alFG'
@@ -150,19 +159,3 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
-
-alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
-alias irc="irssi"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-
-alias wintermute="ssh caleb_simpson@wintermute.shopify.io"
-
-### Command Notes:
-# In ssh:
-# screen = open a detachable shell
-# screen -r  = reopen your last screen
-# <c-a><c-d> (while in a screen) = detact with killing
-# <c-d> (while in a screen) = kill screen (???)
