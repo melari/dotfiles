@@ -1,11 +1,7 @@
-matcher must be installed for the ctrlP plugin for vim to work properly:
-  Follow instructions from: https://github.com/burke/matcher
-  * clone
-  * make
-  * make install
-  * Make sure to copy the matcher file from the build directory into ~/bin/
+Installation
+============
 
-The mac and linux PS1 settings require the existance of ~/.git-completion.sh (included in /generic)
+$ ./install
 
 On Mac:
   - If using iterm2 make sure to change preferences > profiles > Terminal > Report Terminal Type to "xterm-256color"

@@ -1,0 +1,12 @@
+echo "Installing..."
+cp -r .vim ~/.vim
+cp .vimrc ~/.vimrc
+cp .bash_profile ~/.bash_profile
+cp .gitignore ~/.gitignore
+cp .gitconfig ~/.gitconfig
+cp .git-completion.sh ~/.git-completion.sh
+
+git config --global core.excludesfile ~/.gitignore
+echo "Complete."
+
+echo "See README for final details."
