@@ -47,7 +47,7 @@
 " === Plugins === "
 call plug#begin('~/.vim/plugged')
 
-Plug 'git@github.com:scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
+"Plug 'git@github.com:scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
 Plug 'git@github.com:vim-ruby/vim-ruby.git'                                    " Adds ruby syntax support
 Plug 'git@github.com:tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'git@github.com:jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
@@ -61,15 +61,14 @@ Plug 'git@github.com:gregsexton/MatchTag.git'                                  "
 Plug 'git@github.com:scrooloose/nerdtree.git'                                  " Adds directory browser
 Plug 'git@github.com:bling/vim-airline.git'                                    " Adds airline status bar
 Plug 'git@github.com:godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
-Plug 'git@github.com:xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
-Plug 'git@github.com:xolox/vim-misc.git'                                       " Dependency of vim-easytags
+"Plug 'git@github.com:xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
+"Plug 'git@github.com:xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'git@github.com:kien/ctrlp.vim.git'                                       " Adds fuzzy finder
 Plug 'git@github.com:burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
 Plug 'git@github.com:airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'git@github.com:nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'git@github.com:tonchis/vim-to-github.git'                                " Adds the :ToGithub command
-Plug 'git@github.com:sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
-Plug 'git@github.com:mhinz/vim-startify.git'                                   " Adds a better start menu (MRU file list)
+"Plug 'git@github.com:sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
 Plug 'git@github.com:vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'git@github.com:tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 
@@ -92,7 +91,8 @@ set cursorline                              " Highlight the current line being e
 set ic                                      " Use incremental search
 set hls is                                  " Highlight search results (and partial results)
 set noerrorbells visualbell t_vb=           " Disable beeping and flashing on errors
-set foldmethod=syntax foldlevelstart=20     " Use the syntax definition to decide where to fold
+set foldmethod=indent foldlevelstart=20     " Use the syntax definition to decide where to fold
+set synmaxcol=200                           " Only bother highlighting the first 200 characters of a line before giving up
 autocmd GUIEnter * set visualbell t_vb=     " Disable beeping and flashing on errors
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
 highlight PmenuSel ctermfg=255 ctermbg=88|  " Custom colors for autocomplete menu (selected item)
@@ -105,19 +105,19 @@ let g:syntastic_always_populate_loc_list=1| " Populate location-list automatical
 let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
 let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'} " Hide these evil warnings
 
 
 " === KEY MAPPINGS === "
 nnoremap ` :NERDTreeToggle<CR>|                      " Open directory browser
-nnoremap <c-l> :vsp<CR>:Startify<CR>|                " Open fuzzy finder (in a new vertically split window)
-nnoremap <c-k> :new<CR>:Startify<CR>|                " Open fuzzy finder (in a new horizontally split window)
+nnoremap <c-l> :vsp<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new vertically split window)
+nnoremap <c-k> :new<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new horizontally split window)
 nnoremap q: :q|                                      " Common typo that would open an annoying panel
 nnoremap K Vk|                                       " Common typo that closes vim momentarily
 nnoremap J Vj|                                       " Common typo that joins a line
 nnoremap <leader><leader> :nohl<CR>:set nopaste<CR>| " Used to reset back to default editing mode after a search, replace, or paste
 nnoremap <leader>ws :%s/\s\+$//g<CR><c-o>|           " Remove all trailing whitespace
 nnoremap <F5> :GundoToggle<CR>|                      " Open the gundo browser
-nnoremap <F6> :Startify<CR>|                         " Open the startify menu
 nnoremap <LEFT> <c-w><|                              " Decrease current window width
 nnoremap <RIGHT> <c-w>>|                             " Increase current window width
 nnoremap <UP> <c-w>+|                                " Increase current window height
