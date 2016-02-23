@@ -140,14 +140,15 @@ alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
 alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
 alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
-alias test='b rake test TEST='
+alias test='b ruby -Itest'
 alias cop='b rubocop'
 
 # Russbot alias
 alias russbot-ssh="ssh russbot-staging"
 alias russbot-deploy="USER=caleb_simpson cap staging deploy" #Add SKIP_LHM=true, to deploy without running LHMs.
 alias russbot-console="DISABLE_SPRING=1 USER=caleb_simpson bundle exec rails c -e stagingdb"
-alias russbot-lhm="RAILS_ENV=stagingdb USER=caleb_simpson bundel exec rake lhm:run"
+alias russbot-lhm="RAILS_ENV=stagingdb USER=caleb_simpson bundle exec rake lhm:run"
+alias russbot-server="RAILS_ENV=stagingdb USER=caleb_simpson bundle exec rails s"
 
 # Vagrant Alias
 alias vap='cd ~/code/vagrant && git pull origin master && vagrant up --provision'
