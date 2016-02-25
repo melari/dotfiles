@@ -98,9 +98,7 @@ autocmd GUIEnter * set visualbell t_vb=     " Disable beeping and flashing on er
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
 highlight PmenuSel ctermfg=255 ctermbg=88|  " Custom colors for autocomplete menu (selected item)
 highlight TrailingWhitespace ctermbg=red|   " Highlight extra whitespace
-match TrailingWhitespace /\s\+$/|          " Defines what trailing whitespace is
-highlight TabWhitespace ctermbg=gray|       " Highlight tabs
-match TabWhitespace /\t/|                   " Defines what tab whitespace is
+match TrailingWhitespace /\s\+$/         " Defines what trailing whitespace is
 let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
 let g:syntastic_always_populate_loc_list=1| " Populate location-list automatically
 let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
@@ -183,13 +181,10 @@ function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
   return split(system(cmd), "\n")
 endfunction
 
-" Better indent support for PHP by making it possible to indent HTML sections
-" as well.
+" ====== Better indent support for PHP by making it possible to indent HTML sections ======= "
 if exists("b:did_indent")
   finish
 endif
-" This script pulls in the default indent/php.vim with the :runtime command
-" which could re-run this script recursively unless we catch that:
 if exists('s:doing_indent_inits')
   finish
 endif
