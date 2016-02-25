@@ -56,6 +56,7 @@ Plug 'git@github.com:plasticboy/vim-markdown.git'                              "
 Plug 'git@github.com:elzr/vim-json.git'                                        " Adds JSON syntax support
 Plug 'git@github.com:StanAngeloff/php.vim.git'                                 " Adds better PHP syntax support
 Plug 'git@github.com:captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php combined syntax support
+Plug 'git@github.com:groenewege/vim-less.git'                                  " Adds LESS syntax support
 Plug 'git@github.com:ap/vim-css-color.git'                                     " Adds css color previews
 Plug 'git@github.com:gregsexton/MatchTag.git'                                  " Adds HTML end tag matching
 Plug 'git@github.com:scrooloose/nerdtree.git'                                  " Adds directory browser
