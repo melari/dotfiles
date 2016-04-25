@@ -7,10 +7,6 @@ elif [[ $unamestr == Linux* ]]; then
   platform='linux'
 fi
 
-# Enable rbenv
-PATH=$PATH:$HOME/.rbenv/bin
-eval "$(rbenv init -)"
-
 # custom directories to our executable PATH
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/bin
