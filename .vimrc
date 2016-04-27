@@ -48,30 +48,29 @@
 call plug#begin('~/.vim/plugged')
 
 "Plug 'git@github.com:scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
-Plug 'git@github.com:vim-ruby/vim-ruby.git'                                    " Adds ruby syntax support
-Plug 'git@github.com:tpope/vim-rails.git'                                      " Adds rails syntax support
-Plug 'git@github.com:jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
-Plug 'git@github.com:kchmck/vim-coffee-script.git'                             " Adds coffee-script syntax support
-Plug 'git@github.com:plasticboy/vim-markdown.git'                              " Adds markdown syntax support
-Plug 'git@github.com:elzr/vim-json.git'                                        " Adds JSON syntax support
-Plug 'git@github.com:StanAngeloff/php.vim.git'                                 " Adds better PHP syntax support
-Plug 'git@github.com:captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php combined syntax support
-Plug 'git@github.com:groenewege/vim-less.git'                                  " Adds LESS syntax support
-Plug 'git@github.com:ap/vim-css-color.git'                                     " Adds css color previews
-Plug 'git@github.com:gregsexton/MatchTag.git'                                  " Adds HTML end tag matching
-Plug 'git@github.com:scrooloose/nerdtree.git'                                  " Adds directory browser
-Plug 'git@github.com:bling/vim-airline.git'                                    " Adds airline status bar
-Plug 'git@github.com:godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
-"Plug 'git@github.com:xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
-"Plug 'git@github.com:xolox/vim-misc.git'                                       " Dependency of vim-easytags
-Plug 'git@github.com:kien/ctrlp.vim.git'                                       " Adds fuzzy finder
-Plug 'git@github.com:burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
-Plug 'git@github.com:airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
-Plug 'git@github.com:nicwest/QQ.vim.git'                                       " Curl wrapper
-Plug 'git@github.com:tonchis/vim-to-github.git'                                " Adds the :ToGithub command
-"Plug 'git@github.com:sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
-Plug 'git@github.com:vim-scripts/Rename.git'                                   " Adds :Rename command
-Plug 'git@github.com:tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
+Plug 'https://github.com/vim-ruby/vim-ruby.git'                                    " Adds ruby syntax support
+Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
+Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
+Plug 'https://github.com/kchmck/vim-coffee-script.git'                             " Adds coffee-script syntax support
+Plug 'https://github.com/plasticboy/vim-markdown.git'                              " Adds markdown syntax support
+Plug 'https://github.com/elzr/vim-json.git'                                        " Adds JSON syntax support
+Plug 'https://github.com/StanAngeloff/php.vim.git'                                 " Adds better PHP syntax support
+Plug 'https://github.com/captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php combined syntax support
+Plug 'https://github.com/ap/vim-css-color.git'                                     " Adds css color previews
+Plug 'https://github.com/gregsexton/MatchTag.git'                                  " Adds HTML end tag matching
+Plug 'https://github.com/scrooloose/nerdtree.git'                                  " Adds directory browser
+Plug 'https://github.com/bling/vim-airline.git'                                    " Adds airline status bar
+Plug 'https://github.com/godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
+"Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
+"Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
+Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
+Plug 'https://github.com/burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
+Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
+Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
+Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
+"Plug 'https://github.com/sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
+Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
+Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 
 call plug#end()
 
