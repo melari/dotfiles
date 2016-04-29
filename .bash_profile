@@ -108,6 +108,9 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+# enable dev
+if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
+
 # Custom Alias #
 alias l='ls -alFG'
 alias ls='ls -G'
