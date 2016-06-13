@@ -41,6 +41,8 @@
 "   :Rename <name>    | Renames the current open file to <name>
 "   :so %             | Source the current buffer
 "   :Gblame           | Show inline blame of current file
+"   gS                | split 1 line into multiple
+"   gJ                | combine block into 1 line
 "  =============================================================================
 
 
@@ -65,12 +67,13 @@ Plug 'https://github.com/godlygeek/tabular.git'                                 
 "Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
 Plug 'https://github.com/burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
-Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
+"Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
 "Plug 'https://github.com/sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
+Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 
 call plug#end()
 
