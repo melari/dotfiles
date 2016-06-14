@@ -125,9 +125,11 @@ alias couch="ssh couchpotato.simpson.center"
 alias sycamore="ssh sycamore.simpson.center"
 
 # Git Alias
-alias co="git checkout"
+alias m="git checkout master"
 alias branch="git branch --color"
 alias diff="git diff -v --color"
+alias diff-head="diff-single HEAD"
+alias diff-branch="diff master"
 alias st="git status"
 alias gl="git log --graph --abbrev-commit --decorate --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset %Cred%d%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
