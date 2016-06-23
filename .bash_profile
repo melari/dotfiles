@@ -125,6 +125,7 @@ alias couch="ssh couchpotato.simpson.center"
 alias sycamore="ssh sycamore.simpson.center"
 
 # Git Alias
+alias co="git checkout"
 alias m="git checkout master"
 alias branch="git branch --color"
 alias diff="git diff -v --color"
