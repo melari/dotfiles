@@ -55,7 +55,7 @@ Plug 'https://github.com/kchmck/vim-coffee-script.git'                          
 Plug 'https://github.com/plasticboy/vim-markdown.git'                              " Adds markdown syntax support
 Plug 'https://github.com/elzr/vim-json.git'                                        " Adds JSON syntax support
 Plug 'https://github.com/StanAngeloff/php.vim.git'                                 " Adds better PHP syntax support
-Plug 'https://github.com/captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php combined syntax support
+Plug 'https://github.com/captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php auto-indent support
 Plug 'https://github.com/ap/vim-css-color.git'                                     " Adds css color previews
 Plug 'https://github.com/gregsexton/MatchTag.git'                                  " Adds HTML end tag matching
 Plug 'https://github.com/scrooloose/nerdtree.git'                                  " Adds directory browser
@@ -68,7 +68,6 @@ Plug 'https://github.com/burke/matcher.git'                                     
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
-"Plug 'https://github.com/sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 
@@ -181,41 +180,3 @@ function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
   let cmd = cmd.a:str
   return split(system(cmd), "\n")
 endfunction
-
-" Better indent support for PHP by making it possible to indent HTML sections
-" as well.
-if exists("b:did_indent")
-  finish
-endif
-" This script pulls in the default indent/php.vim with the :runtime command
-" which could re-run this script recursively unless we catch that:
-if exists('s:doing_indent_inits')
-  finish
-endif
-let s:doing_indent_inits = 1
-runtime! indent/html.vim
-unlet b:did_indent
-runtime! indent/php.vim
-unlet s:doing_indent_inits
-function! GetPhpHtmlIndent(lnum)
-  if exists('*HtmlIndent')
-    let html_ind = HtmlIndent()
-  else
-    let html_ind = HtmlIndentGet(a:lnum)
-  endif
-  let php_ind = GetPhpIndent()
-  " priority one for php indent script
-  if php_ind > -1
-    return php_ind
-  endif
-  if html_ind > -1
-    if getline(a:num) =~ "^<?" && (0< searchpair('<?', '', '?>', 'nWb')
-          \ || 0 < searchpair('<?', '', '?>', 'nW'))
-      return -1
-    endif
-    return html_ind
-  endif
-  return -1
-endfunction
-setlocal indentexpr=GetPhpHtmlIndent(v:lnum)
-setlocal indentkeys+=<>>
