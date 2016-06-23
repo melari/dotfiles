@@ -41,6 +41,8 @@
 "   :Rename <name>    | Renames the current open file to <name>
 "   :so %             | Source the current buffer
 "   :Gblame           | Show inline blame of current file
+"   gS                | split 1 line into multiple
+"   gJ                | combine block into 1 line
 "  =============================================================================
 
 
@@ -65,11 +67,12 @@ Plug 'https://github.com/godlygeek/tabular.git'                                 
 "Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
 Plug 'https://github.com/burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
-Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
+"Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
+Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 
 call plug#end()
 
@@ -96,9 +99,7 @@ autocmd GUIEnter * set visualbell t_vb=     " Disable beeping and flashing on er
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
 highlight PmenuSel ctermfg=255 ctermbg=88|  " Custom colors for autocomplete menu (selected item)
 highlight TrailingWhitespace ctermbg=red|   " Highlight extra whitespace
-match TrailingWhitespace /\s\+$/|          " Defines what trailing whitespace is
-highlight TabWhitespace ctermbg=gray|       " Highlight tabs
-match TabWhitespace /\t/|                   " Defines what tab whitespace is
+match TrailingWhitespace /\s\+$/         " Defines what trailing whitespace is
 let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
 let g:syntastic_always_populate_loc_list=1| " Populate location-list automatically
 let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
@@ -116,7 +117,6 @@ nnoremap K Vk|                                       " Common typo that closes v
 nnoremap J Vj|                                       " Common typo that joins a line
 nnoremap <leader><leader> :nohl<CR>:set nopaste<CR>| " Used to reset back to default editing mode after a search, replace, or paste
 nnoremap <leader>ws :%s/\s\+$//g<CR><c-o>|           " Remove all trailing whitespace
-nnoremap <F5> :GundoToggle<CR>|                      " Open the gundo browser
 nnoremap <LEFT> <c-w><|                              " Decrease current window width
 nnoremap <RIGHT> <c-w>>|                             " Increase current window width
 nnoremap <UP> <c-w>+|                                " Increase current window height

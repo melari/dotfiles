@@ -108,6 +108,9 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+# enable dev
+if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
+
 # Custom Alias #
 alias l='ls -alFG'
 alias ls='ls -G'
@@ -119,16 +122,21 @@ alias bashrc="vim ~/.bash_profile && resource"
 alias notes="vim ~/notes"
 alias open-again="open -n -a"
 alias couch="ssh couchpotato.simpson.center"
+alias sycamore="ssh sycamore.simpson.center"
 
 # Git Alias
+alias m="git checkout master"
 alias branch="git branch --color"
 alias diff="git diff -v --color"
+alias diff-head="diff-single HEAD"
+alias diff-branch="diff master"
 alias st="git status"
-alias gl="git log --graph --abbrev-commit --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset'"
+alias gl="git log --graph --abbrev-commit --decorate --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset %Cred%d%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
 alias lstash-apply="git reset --soft HEAD^ && st"
-alias branch-cleanup="git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin"
-alias gupdate="git checkout master && git fetch && git merge origin/master && bundle install && bundle exec rake db:migrate"
+alias branch-cleanup="echo '===== cleaning branches =====' && git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin && echo '===== done. remaining branches: =====' && branch"
+alias update-master="echo '===== updating master =====' && co master && git pull origin master && dev up && branch-cleanup"
+alias rebase-latest-master="update-master && echo '===== rebasing on new master =====' && co - && git rebase master && echo '===== done ====='"
 alias ci="git checkout caleb-temp-test && git checkout - && git branch -f caleb-temp-test HEAD && git checkout - && git push origin caleb-temp-test -f && git checkout -"
 
 # Rails Alias

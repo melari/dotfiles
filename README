@@ -17,3 +17,10 @@ Then to generated the ctags, navigate to the project directory and run:
 $ ctags -R .
 
 You can then jump to a definition with <c-]>
+
+Make sure to install vim plugins:
+$ vim ~/.vimrc
+:PlugInstall
+
+On linux if .bash_profile isn't being sourced, add to .bashrc:
+source ~/.bash_profile
