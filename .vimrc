@@ -70,7 +70,6 @@ Plug 'https://github.com/burke/matcher.git'                                     
 "Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
-"Plug 'https://github.com/sjl/gundo.vim.git'                                        " Adds the gundo undo-tree browser
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
@@ -118,7 +117,6 @@ nnoremap K Vk|                                       " Common typo that closes v
 nnoremap J Vj|                                       " Common typo that joins a line
 nnoremap <leader><leader> :nohl<CR>:set nopaste<CR>| " Used to reset back to default editing mode after a search, replace, or paste
 nnoremap <leader>ws :%s/\s\+$//g<CR><c-o>|           " Remove all trailing whitespace
-nnoremap <F5> :GundoToggle<CR>|                      " Open the gundo browser
 nnoremap <LEFT> <c-w><|                              " Decrease current window width
 nnoremap <RIGHT> <c-w>>|                             " Increase current window width
 nnoremap <UP> <c-w>+|                                " Increase current window height
