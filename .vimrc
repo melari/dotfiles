@@ -50,7 +50,6 @@
 call plug#begin('~/.vim/plugged')
 
 "Plug 'git@github.com:scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
-Plug 'https://github.com/vim-ruby/vim-ruby.git'                                    " Adds ruby syntax support
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
 Plug 'https://github.com/kchmck/vim-coffee-script.git'                             " Adds coffee-script syntax support
