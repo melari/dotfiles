@@ -49,7 +49,7 @@
 " === Plugins === "
 call plug#begin('~/.vim/plugged')
 
-"Plug 'git@github.com:scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
+Plug 'git@github.com:scrooloose/syntastic.git'                                     " Adds in-line syntax error highlighting
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
 Plug 'https://github.com/kchmck/vim-coffee-script.git'                             " Adds coffee-script syntax support
@@ -66,12 +66,13 @@ Plug 'https://github.com/godlygeek/tabular.git'                                 
 "Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
 Plug 'https://github.com/burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
-"Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
+Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
+Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
 
 call plug#end()
 
