@@ -73,6 +73,7 @@ Plug 'https://github.com/vim-scripts/Rename.git'                                
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
+Plug 'https://github.com/evidens/vim-twig.git'                                     " Adds twig syntax highlighting
 
 call plug#end()
 
