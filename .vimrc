@@ -107,6 +107,7 @@ let g:syntastic_auto_loc_list=1|            " Automatically open the location-li
 let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
 let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'} " Hide these evil warnings
+let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
 
 
 " === KEY MAPPINGS === "

@@ -1,8 +1,7 @@
 *.swp
-*.gem
+*.swo
 .DS_Store
 .svn
 .rvmrc
-*.gem
 tags
 .vim/plugged
