@@ -13,6 +13,11 @@ export PATH=$PATH:~/bin
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 
+if [[ $platform == 'osx' ]]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
 # Makes rake test have nice output.
 export REPORTERS=1
 
