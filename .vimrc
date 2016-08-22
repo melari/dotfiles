@@ -4,9 +4,11 @@
 " * Run :PlugInstall to install all vim extensions listed below.
 " * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
-" * After command-p is installed, it requires some additional c compiliation:
-"     $ cd ~/.vim/plugged/matcher
-"     $ make
+" * After cpsm is installed, it requires some additional python compiliation:
+"     $ cd ~/.vim/plugged/cpsm
+"     $ mkdir build
+"     $ cd build
+"     $ cmake -DPY3:BOOL=OFF ..
 "     $ make install
 " * After vim-airline is installed, a patched font is required. Install by
 "   double clicking the font, then select it in iTerm (make sure to do it for
@@ -65,7 +67,7 @@ Plug 'https://github.com/godlygeek/tabular.git'                                 
 "Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
 "Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
-Plug 'https://github.com/burke/matcher.git'                                        " Standalone version of command-t to plug into ctrl-p (no ruby needed)
+Plug 'https://github.com/nixprime/cpsm.git'                                        " Matcher for ctrlp specialized for paths
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
 Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
@@ -108,8 +110,8 @@ let g:syntastic_check_on_open=1|            " Check for syntax errors when first
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
 let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'} " Hide these evil warnings
 let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
-
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " Tell ctrlp to use cpsm
 
 
 " === KEY MAPPINGS === "
@@ -164,23 +166,3 @@ function! GitGrep(...)
   let &grepprg = save
 endfun
 command! -nargs=? G call GitGrep(<f-args>)
-
-" Integrates matcher with ctrl+p
-let g:path_to_matcher = "/usr/local/bin/matcher"
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
-let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-  let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-  if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-    call writefile(a:items, cachefile)
-  endif
-  if !filereadable(cachefile)
-    return []
-  endif
-  let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
-  if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-    let cmd = cmd.'--no-dotfiles '
-  endif
-  let cmd = cmd.a:str
-  return split(system(cmd), "\n")
-endfunction
