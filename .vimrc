@@ -53,6 +53,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/scrooloose/syntastic.git'                                     " Adds in-line syntax error highlighting
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
+Plug 'https://github.com/vim-ruby/vim-ruby.git'
 Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
 Plug 'https://github.com/kchmck/vim-coffee-script.git'                             " Adds coffee-script syntax support
 Plug 'https://github.com/plasticboy/vim-markdown.git'                              " Adds markdown syntax support
@@ -92,7 +93,7 @@ set smartcase                               " Do smart case matching
 set cindent smartindent autoindent          " Automatic indenting
 set expandtab tabstop=2 shiftwidth=2        " Use 2 space tabs
 set number                                  " Show line numbers
-set cursorline                              " Highlight the current line being edited
+"set cursorline                              " Highlight the current line being edited
 set ic                                      " Use incremental search
 set hls is                                  " Highlight search results (and partial results)
 set noerrorbells visualbell t_vb=           " Disable beeping and flashing on errors
