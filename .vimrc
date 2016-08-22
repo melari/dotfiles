@@ -78,6 +78,9 @@ Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                         
 Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
 Plug 'https://github.com/evidens/vim-twig.git'                                     " Adds twig syntax highlighting
 
+Plug 'https://github.com/vim-scripts/taglist.vim.git'
+Plug 'https://github.com/majutsushi/tagbar.git'
+
 call plug#end()
 
 
@@ -113,6 +116,8 @@ let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .
 let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " Tell ctrlp to use cpsm
+let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
+let g:tagbar_left=1|                        " Open tagbar on the left instead of right
 
 
 " === KEY MAPPINGS === "
@@ -135,6 +140,7 @@ vnoremap k gk|                                       " Allows easier nav on wrap
 vnoremap . :norm.<CR>|                               " Execute last command sequence over all selected lines
 vnoremap <leader># :norm i#<CR>|                     " Comment out selected lines
 vnoremap <leader>3 :norm x<CR>|                      " Uncomment selected lines
+nnoremap ~ :TagbarToggle<CR>|                        " Open tagbar
 
 
 " === FILETYPE MAPPINGS === "
