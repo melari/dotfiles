@@ -5,6 +5,7 @@
 " * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
 " * After cpsm is installed, it requires some additional python compiliation:
+"     $ sudo apt-get install libboost-all-dev python-dev cmake [LINUX]
 "     $ cd ~/.vim/plugged/cpsm
 "     $ mkdir build
 "     $ cd build
@@ -14,7 +15,8 @@
 "   double clicking the font, then select it in iTerm (make sure to do it for
 "   both the ascii and non-ascii fonts!)
 " * Exuberant ctags must be installed for goto-definition features:
-"    $ brew install ctags-exuberant
+"    $ brew install ctags-exuberant [OSX]
+"    $ sudo apt-get install exuberant-ctags [LINUX]
 " * Ctags need to be manually generated the first time you open a project:
 "    $ ctags -R .
 " * After this is done once, the vim-easytags plugin will keep them up to date.
