@@ -112,12 +112,15 @@ let g:syntastic_always_populate_loc_list=1| " Populate location-list automatical
 let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
 let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
-let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'} " Hide these evil warnings
-let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " Tell ctrlp to use cpsm
 let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
 let g:tagbar_left=1|                        " Open tagbar on the left instead of right
+
+" === Error messages to hide === "
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'}
+let g:syntastic_ruby_mri_quiet_messages = {'regex': 'ambiguous first argument.*'}
+let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
 
 
 " === KEY MAPPINGS === "
