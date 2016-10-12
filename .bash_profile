@@ -126,8 +126,8 @@ alias resource="source ~/.bash_profile"
 alias bashrc="vim ~/.bash_profile && resource"
 alias notes="vim ~/notes"
 alias open-again="open -n -a"
-alias couch="ssh couchpotato.simpson.center"
-alias sycamore="ssh sycamore.simpson.center"
+alias couch="ssh couchpotato.loft.hosting"
+alias sycamore="ssh sycamore.loft.hosting"
 
 # Git Alias
 alias co="git checkout"
