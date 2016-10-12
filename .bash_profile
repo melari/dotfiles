@@ -143,7 +143,7 @@ alias lstash-apply="git reset --soft HEAD^ && st"
 alias branch-cleanup="echo '===== cleaning branches =====' && git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin && echo '===== done. remaining branches: =====' && branch"
 alias update-master="echo '===== updating master =====' && co master && git pull origin master && dev up && branch-cleanup"
 alias rebase-latest-master="update-master && echo '===== rebasing on new master =====' && co - && git rebase master && echo '===== done ====='"
-alias ci="git checkout caleb-temp-test && git checkout - && git branch -f caleb-temp-test HEAD && git checkout - && git push origin caleb-temp-test -f && git checkout -"
+alias ci="git checkout -B $(whoami)-ci-test && git push origin +$(whoami)-ci-test && git checkout - && open 'https://buildkite.com/shopify/shopify-branches/builds?branch=$(whoami)-ci-test'"
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
