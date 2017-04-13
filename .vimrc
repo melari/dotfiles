@@ -4,13 +4,6 @@
 " * Run :PlugInstall to install all vim extensions listed below.
 " * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
-" * After cpsm is installed, it requires some additional python compiliation:
-"     $ sudo apt-get install libboost-all-dev python-dev cmake [LINUX]
-"     $ cd ~/.vim/plugged/cpsm
-"     $ mkdir build
-"     $ cd build
-"     $ cmake -DPY3:BOOL=OFF ..
-"     $ make install
 " * After vim-airline is installed, a patched font is required. Install by
 "   double clicking the font, then select it in iTerm (make sure to do it for
 "   both the ascii and non-ascii fonts!)
@@ -23,6 +16,9 @@
 " * After vimproc is installed, it requires additional c compiliation:
 "     $ cd ~/.vim/plugged/vimproc
 "     $ make
+" * Make sure to install FZF:
+"     $ brew install fzf
+"     $ /usr/local/opt/fzf/install
 "  =============================================================================
 "
 "                        ~~ Handy Command Reference ~~
@@ -32,7 +28,7 @@
 "   :CoffeeWatch vert | Open preview of generated javascript
 "   :G <pattern>      | Git Grep the current project
 "   :Tab /<pattern>   | Align text along the pattern
-"   <c-p>             | Open ctrl-p fuzzy finder
+"   <c-p>             | Open FZF fuzzy finder
 "   :HeaderDecrease   | decrease level of all headers in buffer (markdown)
 "   :HeaderIncrease   | increase level of all headers in buffer (markdown)
 "   :Toc              | Open a table of contents of the markdown file
@@ -67,14 +63,13 @@ Plug 'https://github.com/bling/vim-airline.git'                                 
 Plug 'https://github.com/godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
 Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
 Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
-Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
-Plug 'https://github.com/nixprime/cpsm.git'                                        " Matcher for ctrlp specialized for paths
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
 Plug 'https://github.com/evidens/vim-twig.git'                                     " Adds twig syntax highlighting
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'                                " FZF support
 
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
@@ -107,7 +102,6 @@ let g:syntastic_always_populate_loc_list=1| " Populate location-list automatical
 let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " Tell ctrlp to use cpsm
 let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
 let g:easytags_auto_highlight=0|            " Dont auto highlight tags
 
@@ -126,8 +120,9 @@ match TrailingWhitespace /\s\+$/            " Defines what trailing whitespace i
 
 " === KEY MAPPINGS === "
 nnoremap ` :NERDTreeToggle<CR>|                      " Open directory browser
-nnoremap <c-l> :vsp<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new vertically split window)
-nnoremap <c-k> :new<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new horizontally split window)
+nnoremap <c-p> :FZF<CR>|
+nnoremap <c-l> :vsp<CR>:FZF<CR>|                " Open fuzzy finder (in a new vertically split window)
+nnoremap <c-k> :new<CR>:FZF<CR>|                " Open fuzzy finder (in a new horizontally split window)
 nnoremap q: :q|                                      " Common typo that would open an annoying panel
 nnoremap K Vk|                                       " Common typo that closes vim momentarily
 nnoremap J Vj|                                       " Common typo that joins a line

@@ -150,7 +150,7 @@ alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
 alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
 alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
-alias test='b ruby -Itest'
+alias itest='b ruby -I"lib:test"'
 alias cop='b rubocop'
 
 # Russbot alias
@@ -175,3 +175,6 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
+
+# Setup FZF (including auto-completion and key bindings)
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
