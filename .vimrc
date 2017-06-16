@@ -47,7 +47,7 @@
 " === Plugins === "
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/scrooloose/syntastic.git'                                 " Adds in-line syntax error highlighting
+Plug 'https://github.com/w0rp/ale.git'                                           " Async Lint Engine (ALE) - forked to include patch for bundled rubocop support
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'https://github.com/vim-ruby/vim-ruby.git'
 Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
@@ -61,8 +61,8 @@ Plug 'https://github.com/gregsexton/MatchTag.git'                               
 Plug 'https://github.com/scrooloose/nerdtree.git'                                  " Adds directory browser
 Plug 'https://github.com/bling/vim-airline.git'                                    " Adds airline status bar
 Plug 'https://github.com/godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
-Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
-Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
+" Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
+" Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
@@ -73,6 +73,7 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'                             
 
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
+
 
 call plug#end()
 
@@ -96,9 +97,7 @@ set noerrorbells visualbell t_vb=           " Disable beeping and flashing on er
 set foldmethod=manual foldlevelstart=20     " Use manual folding
 set synmaxcol=200                           " Only bother highlighting the first 200 characters of a line before giving up
 autocmd GUIEnter * set visualbell t_vb=     " Disable beeping and flashing on errors
-let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
 let g:syntastic_always_populate_loc_list=1| " Populate location-list automatically
-"let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
 let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
 let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
@@ -106,9 +105,22 @@ let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a ta
 let g:easytags_auto_highlight=0|            " Dont auto highlight tags
 
 " === Error messages to hide === "
-let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'}
-let g:syntastic_ruby_mri_quiet_messages = {'regex': 'ambiguous first argument.*'}
-let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
+" let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'}
+" let g:syntastic_ruby_mri_quiet_messages = {'regex': 'ambiguous first argument.*'}
+" let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_linters = {
+\ 'ruby': ['rubocop', 'ruby'],
+\}
+
+let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
+" Section layout customization (see https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt#L299-L360)
+let g:airline#extensions#default#layout = [
+\ ['error', 'warning', 'a', 'c'],
+\ ['z', 'b']
+\ ]
 
 " === Custom syntax highlighting === "
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
@@ -120,9 +132,9 @@ match TrailingWhitespace /\s\+$/            " Defines what trailing whitespace i
 
 " === KEY MAPPINGS === "
 nnoremap ` :NERDTreeToggle<CR>|                      " Open directory browser
-nnoremap <c-p> :FZF<CR>|
-nnoremap <c-l> :vsp<CR>:FZF<CR>|                " Open fuzzy finder (in a new vertically split window)
-nnoremap <c-k> :new<CR>:FZF<CR>|                " Open fuzzy finder (in a new horizontally split window)
+nnoremap <c-p> :FZF<CR>|                             " Open fuzzy finder (in current window)
+nnoremap <c-l> :vsp<CR>:FZF<CR>|                     " Open fuzzy finder (in a new vertically split window)
+nnoremap <c-k> :new<CR>:FZF<CR>|                     " Open fuzzy finder (in a new horizontally split window)
 nnoremap q: :q|                                      " Common typo that would open an annoying panel
 nnoremap K Vk|                                       " Common typo that closes vim momentarily
 nnoremap J Vj|                                       " Common typo that joins a line

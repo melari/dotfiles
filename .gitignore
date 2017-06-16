@@ -5,3 +5,5 @@
 .rvmrc
 tags
 .vim/plugged
+.byebug_history
+.starscope.db
