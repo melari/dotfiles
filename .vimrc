@@ -66,6 +66,7 @@ Plug 'https://github.com/godlygeek/tabular.git'                                 
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
+Plug 'https://github.com/tpope/vim-rhubarb.git'                                    " Extends vim-fugitive with gitHUB commands such as :GBrowse
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
 Plug 'https://github.com/evidens/vim-twig.git'                                     " Adds twig syntax highlighting
@@ -153,6 +154,9 @@ vnoremap <leader># :norm i#<CR>|                     " Comment out selected line
 vnoremap <leader>3 :norm x<CR>|                      " Uncomment selected lines
 nnoremap ~ :TagbarToggle<CR>|                        " Open tagbar
 nnoremap tt :let @+ = expand("%")<CR>|               " Copy open filename to clipboard
+
+" === CUSTOM COMMANDS === "
+command Delete :call delete(expand('%'))
 
 " === FILETYPE MAPPINGS === "
 autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby

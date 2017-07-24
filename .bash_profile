@@ -36,6 +36,10 @@ diff-single() {
   git diff $@^..$@ --color
 }
 
+merges-between() {
+  git log $@..$@ --merges --pretty=format:'(%an) %s' | sed -e 's/#\([0-9]*\)/Shopify\/billing#\1/g'
+}
+
 #Setup some basic colors (used in setting PS1)
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
@@ -143,26 +147,21 @@ alias lstash-apply="git reset --soft HEAD^ && st"
 alias branch-cleanup="echo '===== cleaning branches =====' && git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin && echo '===== done. remaining branches: =====' && branch"
 alias update-master="echo '===== updating master =====' && co master && git pull origin master && dev up && branch-cleanup"
 alias rebase-latest-master="update-master && echo '===== rebasing on new master =====' && co - && git rebase master && echo '===== done ====='"
-alias ci="git checkout -B $(whoami)-ci-test && git push origin +$(whoami)-ci-test && git checkout - && open 'https://buildkite.com/shopify/shopify-branches/builds?branch=$(whoami)-ci-test'"
+alias ci="git checkout -B $(whoami)-ci-test && git add -A && git commit -m "[WIP]" && git push origin +$(whoami)-ci-test && git reset --soft HEAD^ && git reset HEAD . && git checkout - && open 'https://buildkite.com/shopify/shopify-branches/builds?branch=$(whoami)-ci-test'"
+
 
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
-alias flush_all='echo '\''flush_all'\'' | nc localhost 21211'
-alias everqueen='RAILS ENV=test b rails s -p 3001 -P /tmp/pid'
 alias itest='b ruby -I"lib:test"'
 alias cop='b rubocop'
 
 # Russbot alias
 alias russbot-ssh="ssh russbot-staging"
-alias russbot-deploy="USER=caleb_simpson bundle exec cap staging deploy" #Add SKIP_LHM=true, to deploy without running LHMs.
+alias russbot-deploy="USER=caleb_simpson bundle exec cap staging deploy"
 alias russbot-console="DISABLE_SPRING=1 USER=caleb_simpson bundle exec rails c -e stagingdb"
 alias russbot-lhm="RAILS_ENV=stagingdb USER=caleb_simpson bundle exec rake lhm:run"
 alias russbot-server="RAILS_ENV=stagingdb USER=caleb_simpson bundle exec rails s"
-
-# Vagrant Alias
-alias vap='cd ~/code/vagrant && git pull origin master && vagrant up --provision'
-alias va='cd ~/code/vagrant && vagrant ssh'
 
 # Platform specific Alias
 if [[ $platform == 'osx' ]]; then
