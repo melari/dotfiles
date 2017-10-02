@@ -20,11 +20,6 @@ export PATH=$PATH:~/bin
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 
-if [[ $platform == 'osx' ]]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
-
 # Makes rake test have nice output.
 export REPORTERS=1
 
@@ -39,7 +34,7 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-diff-single() {
+d-single() {
   git diff $@^..$@ --color
 }
 
@@ -144,9 +139,9 @@ alias sycamore="ssh sycamore.loft.hosting"
 alias co="git checkout"
 alias m="git checkout master"
 alias branch="git branch --color"
-alias diff="git diff -v --color"
-alias diff-head="diff-single HEAD"
-alias diff-branch="diff master"
+alias d="git diff -v --color"
+alias d-head="d-single HEAD"
+alias d-branch="d master"
 alias st="git status"
 alias gl="git log --graph --abbrev-commit --decorate --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset %Cred%d%Creset'"
 alias lstash-save="git commit -am \"[UNFINISHED - LONG STASH]\" && st && branch"
@@ -160,6 +155,7 @@ alias ci="git checkout -B $(whoami)-ci-test && git add -A && git commit -m "[WIP
 # Rails Alias
 alias dbmigrate="rake db:migrate && rake db:test:clone"
 alias b="bundle exec"
+alias r="b rake"
 alias itest='b ruby -I"lib:test"'
 alias cop='b rubocop'
 

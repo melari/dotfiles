@@ -19,6 +19,8 @@
 " * Make sure to install FZF:
 "     $ brew install fzf
 "     $ /usr/local/opt/fzf/install
+" * Make sure to install RipGrep (for :Find command)
+"     $ brew install ripgrep
 "  =============================================================================
 "
 "                        ~~ Handy Command Reference ~~
@@ -27,6 +29,7 @@
 "  -------------------|---------------------------------------------------------
 "   :CoffeeWatch vert | Open preview of generated javascript
 "   :G <pattern>      | Git Grep the current project
+"   :Find <pattern>   | RipGrep of the current project (faster than :G)
 "   :Tab /<pattern>   | Align text along the pattern
 "   <c-p>             | Open FZF fuzzy finder
 "   :HeaderDecrease   | decrease level of all headers in buffer (markdown)
@@ -41,6 +44,8 @@
 "   zf                | fold selected lines
 "   zo                | open selected fold
 "   tt                | copy current file name
+"   :g/<pattern>/d    | delete all lines that match pattern
+"   :g!/<pattern>/d   | delete all lines that do not match pattern
 "  =============================================================================
 
 
@@ -154,9 +159,14 @@ vnoremap <leader># :norm i#<CR>|                     " Comment out selected line
 vnoremap <leader>3 :norm x<CR>|                      " Uncomment selected lines
 nnoremap ~ :TagbarToggle<CR>|                        " Open tagbar
 nnoremap tt :let @+ = expand("%")<CR>|               " Copy open filename to clipboard
+nnoremap U :Find <C-R><C-W><CR>|             " Find all usage of word under cursor
+nnoremap D :Find def <C-R><C-W><CR>|         " Find definition of word under cursor
 
 " === CUSTOM COMMANDS === "
+" :Delete           Delete current file
 command Delete :call delete(expand('%'))
+" :Find [pattern]   Pipe RipGrep into FZF
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " === FILETYPE MAPPINGS === "
 autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby
