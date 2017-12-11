@@ -39,7 +39,7 @@
 "   :so %             | Source the current buffer
 "   :Gblame           | Show inline blame of current file
 "   :Gbrowse          | Opens the current line in the github repo
-"   gS                | split 1 line into multiple
+"   gq                | split 1 line into multiple at word breaks (length of line set by :set tw=80
 "   gJ                | combine block into 1 line
 "   zf                | fold selected lines
 "   zo                | open selected fold
