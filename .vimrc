@@ -1,6 +1,7 @@
 "  ==============================================================================
 "                       ~~ Installation Instructions ~~
 "
+" * Install Vim Plug: https://github.com/junegunn/vim-plug
 " * Run :PlugInstall to install all vim extensions listed below.
 " * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
