@@ -133,7 +133,7 @@ alias bashrc="vim ~/.bash_profile && resource"
 alias notes="vim ~/notes"
 alias open-again="open -n -a"
 alias couch="ssh couchpotato.loft.hosting"
-alias sycamore="ssh sycamore.loft.hosting"
+alias sycamore="ssh sycamore.loft.hosting -p 20022"
 
 # Git Alias
 alias co="git checkout"

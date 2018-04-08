@@ -26,27 +26,29 @@
 "
 "                        ~~ Handy Command Reference ~~
 "
-"        Command      |   Description
-"  -------------------|---------------------------------------------------------
-"   :CoffeeWatch vert | Open preview of generated javascript
-"   :G <pattern>      | Git Grep the current project
-"   :Find <pattern>   | RipGrep of the current project (faster than :G)
-"   :Tab /<pattern>   | Align text along the pattern
-"   <c-p>             | Open FZF fuzzy finder
-"   :HeaderDecrease   | decrease level of all headers in buffer (markdown)
-"   :HeaderIncrease   | increase level of all headers in buffer (markdown)
-"   :Toc              | Open a table of contents of the markdown file
-"   :Rename <name>    | Renames the current open file to <name>
-"   :so %             | Source the current buffer
-"   :Gblame           | Show inline blame of current file
-"   :Gbrowse          | Opens the current line in the github repo
-"   gq                | split 1 line into multiple at word breaks (length of line set by :set tw=80
-"   gJ                | combine block into 1 line
-"   zf                | fold selected lines
-"   zo                | open selected fold
-"   tt                | copy current file name
-"   :g/<pattern>/d    | delete all lines that match pattern
-"   :g!/<pattern>/d   | delete all lines that do not match pattern
+"        Command           |   Description
+"  -------------------     |---------------------------------------------------------
+"   :CoffeeWatch vert      | Open preview of generated javascript
+"   :G <pattern>           | Git Grep the current project (populates to quickfix)
+"   :copen                 | Show quickfix list
+"   :cdo s///gc | update   | Find and replace in all files in quickfix list (remove c so skip confirmations)
+"   :Find <pattern>        | RipGrep of the current project (faster than :G)
+"   :Tab /<pattern>        | Align text along the pattern
+"   <c-p>                  | Open FZF fuzzy finder
+"   :HeaderDecrease        | decrease level of all headers in buffer (markdown)
+"   :HeaderIncrease        | increase level of all headers in buffer (markdown)
+"   :Toc                   | Open a table of contents of the markdown file
+"   :Rename <name>         | Renames the current open file to <name>
+"   :so %                  | Source the current buffer
+"   :Gblame                | Show inline blame of current file
+"   :Gbrowse               | Opens the current line in the github repo
+"   gq                     | split 1 line into multiple at word breaks (length of line set by :set tw=80
+"   gJ                     | combine block into 1 line
+"   zf                     | fold selected lines
+"   zo                     | open selected fold
+"   tt                     | copy current file name
+"   :g/<pattern>/d         | delete all lines that match pattern
+"   :g!/<pattern>/d        | delete all lines that do not match pattern
 "  =============================================================================
 
 
@@ -207,3 +209,6 @@ function! GitGrep(...)
   let &grepprg = save
 endfun
 command! -nargs=? G call GitGrep(<f-args>)
+
+
+
