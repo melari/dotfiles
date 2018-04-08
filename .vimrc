@@ -1,18 +1,10 @@
 "  ==============================================================================
 "                       ~~ Installation Instructions ~~
 "
+" * Install Vim Plug: https://github.com/junegunn/vim-plug
 " * Run :PlugInstall to install all vim extensions listed below.
 " * Run :PlugUpdate to update all vim extensions
 " * Run :PlugClean to remove unused extensions
-" * After cpsm is installed, it requires some additional python compiliation:
-"     $ sudo apt-get install libboost-all-dev python-dev cmake [LINUX]
-"     $ cd ~/.vim/plugged/cpsm
-"     $ ./install.sh [LINUX] (if this fails, may have to do sudo apt-get
-"     install python3.5-dev or similar for missing version)
-"     $ mkdir build [OSX vvv]
-"     $ cd build
-"     $ cmake -DPY3:BOOL=OFF ..
-"     $ make install
 " * After vim-airline is installed, a patched font is required. Install by
 "   double clicking the font, then select it in iTerm (make sure to do it for
 "   both the ascii and non-ascii fonts!)
@@ -25,37 +17,45 @@
 " * After vimproc is installed, it requires additional c compiliation:
 "     $ cd ~/.vim/plugged/vimproc
 "     $ make
+" * Make sure to install FZF:
+"     $ brew install fzf
+"     $ /usr/local/opt/fzf/install
+" * Make sure to install RipGrep (for :Find command)
+"     $ brew install ripgrep
 "  =============================================================================
 "
 "                        ~~ Handy Command Reference ~~
 "
-"        Command      |   Description
-"  -------------------|---------------------------------------------------------
-"   :CoffeeWatch vert | Open preview of generated javascript
-"   :G <pattern>      | Git Grep the current project
-"   :Tab /<pattern>   | Align text along the pattern
-"   <c-p>             | Open ctrl-p fuzzy finder
-"   :HeaderDecrease   | decrease level of all headers in buffer (markdown)
-"   :HeaderIncrease   | increase level of all headers in buffer (markdown)
-"   :Toc              | Open a table of contents of the markdown file
-"   zc & zo           | Close and Open vim folds respectively
-"   QQ                | Open QQ request buffer (or run request)
-"   QH                | Open QQ request history
-"   QAB               | Add basic auth header to current request
-"   QAO               | Add oAuth2 to the current request
-"   :ToGithub         | Opens the current line in the github repo
-"   :Rename <name>    | Renames the current open file to <name>
-"   :so %             | Source the current buffer
-"   :Gblame           | Show inline blame of current file
-"   gS                | split 1 line into multiple
-"   gJ                | combine block into 1 line
+"        Command           |   Description
+"  -------------------     |---------------------------------------------------------
+"   :CoffeeWatch vert      | Open preview of generated javascript
+"   :G <pattern>           | Git Grep the current project (populates to quickfix)
+"   :copen                 | Show quickfix list
+"   :cdo s///gc | update   | Find and replace in all files in quickfix list (remove c so skip confirmations)
+"   :Find <pattern>        | RipGrep of the current project (faster than :G)
+"   :Tab /<pattern>        | Align text along the pattern
+"   <c-p>                  | Open FZF fuzzy finder
+"   :HeaderDecrease        | decrease level of all headers in buffer (markdown)
+"   :HeaderIncrease        | increase level of all headers in buffer (markdown)
+"   :Toc                   | Open a table of contents of the markdown file
+"   :Rename <name>         | Renames the current open file to <name>
+"   :so %                  | Source the current buffer
+"   :Gblame                | Show inline blame of current file
+"   :Gbrowse               | Opens the current line in the github repo
+"   gq                     | split 1 line into multiple at word breaks (length of line set by :set tw=80
+"   gJ                     | combine block into 1 line
+"   zf                     | fold selected lines
+"   zo                     | open selected fold
+"   tt                     | copy current file name
+"   :g/<pattern>/d         | delete all lines that match pattern
+"   :g!/<pattern>/d        | delete all lines that do not match pattern
 "  =============================================================================
 
 
 " === Plugins === "
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/scrooloose/syntastic.git'                                     " Adds in-line syntax error highlighting
+Plug 'https://github.com/w0rp/ale.git'                                           " Async Lint Engine (ALE) - forked to include patch for bundled rubocop support
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'https://github.com/vim-ruby/vim-ruby.git'
 Plug 'https://github.com/jelera/vim-javascript-syntax.git'                         " Adds better javascript syntax support
@@ -69,21 +69,20 @@ Plug 'https://github.com/gregsexton/MatchTag.git'                               
 Plug 'https://github.com/scrooloose/nerdtree.git'                                  " Adds directory browser
 Plug 'https://github.com/bling/vim-airline.git'                                    " Adds airline status bar
 Plug 'https://github.com/godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
-"Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
-"Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
-Plug 'https://github.com/kien/ctrlp.vim.git'                                       " Adds fuzzy finder
-Plug 'https://github.com/nixprime/cpsm.git'                                        " Matcher for ctrlp specialized for paths
+" Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
+" Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
-Plug 'https://github.com/nicwest/QQ.vim.git'                                       " Curl wrapper
-Plug 'https://github.com/tonchis/vim-to-github.git'                                " Adds the :ToGithub command
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
+Plug 'https://github.com/tpope/vim-rhubarb.git'                                    " Extends vim-fugitive with gitHUB commands such as :GBrowse
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'                            " Adds splitting/joining of ruby lines
 Plug 'https://github.com/groenewege/vim-less.git'                                  " Adds less syntax highlighting
 Plug 'https://github.com/evidens/vim-twig.git'                                     " Adds twig syntax highlighting
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'                                " FZF support
 
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
+
 
 call plug#end()
 
@@ -104,30 +103,47 @@ set number                                  " Show line numbers
 set ic                                      " Use incremental search
 set hls is                                  " Highlight search results (and partial results)
 set noerrorbells visualbell t_vb=           " Disable beeping and flashing on errors
-set foldmethod=indent foldlevelstart=20     " Use the syntax definition to decide where to fold
+set foldmethod=manual foldlevelstart=20     " Use manual folding
 set synmaxcol=200                           " Only bother highlighting the first 200 characters of a line before giving up
 autocmd GUIEnter * set visualbell t_vb=     " Disable beeping and flashing on errors
+let g:syntastic_always_populate_loc_list=1| " Populate location-list automatically
+let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
+let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
+let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
+let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
+let g:easytags_auto_highlight=0|            " Dont auto highlight tags
+
+" === Error messages to hide === "
+" let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'}
+" let g:syntastic_ruby_mri_quiet_messages = {'regex': 'ambiguous first argument.*'}
+" let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_linters = {
+\ 'ruby': ['rubocop', 'ruby'],
+\}
+
+let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
+" Section layout customization (see https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt#L299-L360)
+let g:airline#extensions#default#layout = [
+\ ['error', 'warning', 'a', 'c'],
+\ ['z', 'b']
+\ ]
+
+" === Custom syntax highlighting === "
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
 highlight PmenuSel ctermfg=255 ctermbg=88|  " Custom colors for autocomplete menu (selected item)
 highlight TrailingWhitespace ctermbg=red|   " Highlight extra whitespace
-match TrailingWhitespace /\s\+$/         " Defines what trailing whitespace is
-let g:airline_powerline_fonts=1|            " Enable patched airline statusbar font
-let g:syntastic_always_populate_loc_list=1| " Populate location-list automatically
-let g:syntastic_auto_loc_list=1|            " Automatically open the location-list
-let g:syntastic_check_on_open=1|            " Check for syntax errors when first loading the buffer
-let g:syntastic_check_on_wq=0|              " Don't bother checking syntax errors on :wq
-let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'} " Hide these evil warnings
-let g:syntastic_html_tidy_quiet_messages = {'regex': 'trimming empty .*'}
-let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " Tell ctrlp to use cpsm
-let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
-let g:tagbar_left=1|                        " Open tagbar on the left instead of right
+match TrailingWhitespace /\s\+$/            " Defines what trailing whitespace is
+
 
 
 " === KEY MAPPINGS === "
 nnoremap ` :NERDTreeToggle<CR>|                      " Open directory browser
-nnoremap <c-l> :vsp<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new vertically split window)
-nnoremap <c-k> :new<CR>:CtrlP<CR>|                " Open fuzzy finder (in a new horizontally split window)
+nnoremap <c-p> :FZF<CR>|                             " Open fuzzy finder (in current window)
+nnoremap <c-l> :vsp<CR>:FZF<CR>|                     " Open fuzzy finder (in a new vertically split window)
+nnoremap <c-k> :new<CR>:FZF<CR>|                     " Open fuzzy finder (in a new horizontally split window)
 nnoremap q: :q|                                      " Common typo that would open an annoying panel
 nnoremap K Vk|                                       " Common typo that closes vim momentarily
 nnoremap J Vj|                                       " Common typo that joins a line
@@ -145,10 +161,26 @@ vnoremap . :norm.<CR>|                               " Execute last command sequ
 vnoremap <leader># :norm i#<CR>|                     " Comment out selected lines
 vnoremap <leader>3 :norm x<CR>|                      " Uncomment selected lines
 nnoremap ~ :TagbarToggle<CR>|                        " Open tagbar
+nnoremap tt :let @+ = expand("%")<CR>|               " Copy open filename to clipboard
+nnoremap U :Find <C-R><C-W><CR>|             " Find all usage of word under cursor
+nnoremap D :Find def <C-R><C-W><CR>|         " Find definition of word under cursor
 
+" === CUSTOM COMMANDS === "
+" :Delete           Delete current file
+command Delete :call delete(expand('%'))
+" :Find [pattern]   Pipe RipGrep into FZF
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " === FILETYPE MAPPINGS === "
 autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby
+
+" === PROJECT SPECIFIC SETTINGS === "
+
+" >> shopify/billing"
+autocmd BufRead ~/code/Shopify/billing/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
+
+" >> shopify/shopify"
+autocmd BufRead ~/code/Shopify/shopify/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
 
 
 " === MORE INVOLVED CUSTOMIZATIONS === "
@@ -177,3 +209,6 @@ function! GitGrep(...)
   let &grepprg = save
 endfun
 command! -nargs=? G call GitGrep(<f-args>)
+
+
+
