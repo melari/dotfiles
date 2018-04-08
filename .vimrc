@@ -7,7 +7,9 @@
 " * After cpsm is installed, it requires some additional python compiliation:
 "     $ sudo apt-get install libboost-all-dev python-dev cmake [LINUX]
 "     $ cd ~/.vim/plugged/cpsm
-"     $ mkdir build
+"     $ ./install.sh [LINUX] (if this fails, may have to do sudo apt-get
+"     install python3.5-dev or similar for missing version)
+"     $ mkdir build [OSX vvv]
 "     $ cd build
 "     $ cmake -DPY3:BOOL=OFF ..
 "     $ make install
