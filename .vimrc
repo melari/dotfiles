@@ -55,6 +55,7 @@
 " === Plugins === "
 call plug#begin('~/.vim/plugged')
 
+Plug 'https://github.com/rhysd/vim-crystal'
 Plug 'https://github.com/w0rp/ale.git'                                           " Async Lint Engine (ALE) - forked to include patch for bundled rubocop support
 Plug 'https://github.com/tpope/vim-rails.git'                                      " Adds rails syntax support
 Plug 'https://github.com/vim-ruby/vim-ruby.git'
@@ -65,12 +66,12 @@ Plug 'https://github.com/elzr/vim-json.git'                                     
 Plug 'https://github.com/StanAngeloff/php.vim.git'                                 " Adds better PHP syntax support
 Plug 'https://github.com/captbaritone/better-indent-support-for-php-with-html.git' " Adds html/php auto-indent support
 Plug 'https://github.com/ap/vim-css-color.git'                                     " Adds css color previews
-Plug 'https://github.com/gregsexton/MatchTag.git'                                  " Adds HTML end tag matching
+"Plug 'https://github.com/gregsexton/MatchTag.git'                                  " Adds HTML end tag matching [disable, causing errors when highlighting search results]
 Plug 'https://github.com/scrooloose/nerdtree.git'                                  " Adds directory browser
 Plug 'https://github.com/bling/vim-airline.git'                                    " Adds airline status bar
 Plug 'https://github.com/godlygeek/tabular.git'                                    " Adds support for aligning text (use :Tab /=> for ex)
-" Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
-" Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
+Plug 'https://github.com/xolox/vim-easytags.git'                                   " Keeps ctags up to date automatically
+Plug 'https://github.com/xolox/vim-misc.git'                                       " Dependency of vim-easytags
 Plug 'https://github.com/airblade/vim-gitgutter.git'                               " Adds git change notations to the side gutter
 Plug 'https://github.com/vim-scripts/Rename.git'                                   " Adds :Rename command
 Plug 'https://github.com/tpope/vim-fugitive.git'                                   " Adds git commands such as :Gblame
@@ -83,6 +84,24 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'                             
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
 
+" ==== Autocompletion ====
+" Plug 'https://github.com/lifepillar/vim-mucomplete'
+set completeopt+=menuone
+set completeopt+=noselect
+set shortmess+=c " shutoff completion message
+set belloff+=ctrlg "shutoff bells during completion
+let g:mucomplete#enable_auto_at_startup = 1 " show completion as you type without having to ask
+let g:mucomplete#no_mappings = 1 " don't set any mappings, default vim ones are good
+
+" Which completion types to attempt for different filetypes
+" - path: if the text looks like a path
+" - omni: omni-completion if currently enabled
+" - keyn: buffer keyword completion
+" - dict: dictionary completion if set for buffer
+" - uspl: spelling completion if available
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl']
+let g:mucomplete#chains.ruby = ['path', 'omni', 'keyn', 'dict', 'uspl'] "for example
 
 call plug#end()
 
@@ -112,6 +131,7 @@ let g:syntastic_check_on_wq=0|              " Don't bother checking syntax error
 let g:syntastic_ruby_checkers = ["mri", "rubocop"] " Include rubocop checker as well.
 let g:tagbar_autoclose=1|                   " Tagbar closes after selecting a tag to view
 let g:easytags_auto_highlight=0|            " Dont auto highlight tags
+let g:easytags_async=1|                     " Update ctags in the background
 
 " === Error messages to hide === "
 " let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of .* in void context'}
@@ -135,6 +155,7 @@ let g:airline#extensions#default#layout = [
 highlight Pmenu ctermfg=73 ctermbg=15|      " Custom colors for autocomplete menu
 highlight PmenuSel ctermfg=255 ctermbg=88|  " Custom colors for autocomplete menu (selected item)
 highlight TrailingWhitespace ctermbg=red|   " Highlight extra whitespace
+highlight ALEWarning ctermbg=none cterm=underline| " Syntastic warnings
 match TrailingWhitespace /\s\+$/            " Defines what trailing whitespace is
 
 
@@ -147,7 +168,7 @@ nnoremap <c-k> :new<CR>:FZF<CR>|                     " Open fuzzy finder (in a n
 nnoremap q: :q|                                      " Common typo that would open an annoying panel
 nnoremap K Vk|                                       " Common typo that closes vim momentarily
 nnoremap J Vj|                                       " Common typo that joins a line
-nnoremap <leader><leader> :nohl<CR>:set nopaste<CR>| " Used to reset back to default editing mode after a search, replace, or paste
+nnoremap <leader><leader> :nohl<CR>:set nopaste<CR>:redraw!<CR>| " Used to reset back to default editing mode after a search, replace, or paste
 nnoremap <leader>ws :%s/\s\+$//g<CR><c-o>|           " Remove all trailing whitespace
 nnoremap <LEFT> <c-w><|                              " Decrease current window width
 nnoremap <RIGHT> <c-w>>|                             " Increase current window width
@@ -163,13 +184,14 @@ vnoremap <leader>3 :norm x<CR>|                      " Uncomment selected lines
 nnoremap ~ :TagbarToggle<CR>|                        " Open tagbar
 nnoremap tt :let @+ = expand("%")<CR>|               " Copy open filename to clipboard
 nnoremap U :Find <C-R><C-W><CR>|             " Find all usage of word under cursor
-nnoremap D :Find def <C-R><C-W><CR>|         " Find definition of word under cursor
+"nnoremap D :Find def <C-R><C-W><CR>|         " Find definition of word under cursor
+nnoremap D g<c-]>|                            " Find definition of word under cursor using ctags
 
 " === CUSTOM COMMANDS === "
 " :Delete           Delete current file
 command Delete :call delete(expand('%'))
 " :Find [pattern]   Pipe RipGrep into FZF
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " === FILETYPE MAPPINGS === "
 autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby
@@ -177,10 +199,10 @@ autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby
 " === PROJECT SPECIFIC SETTINGS === "
 
 " >> shopify/billing"
-autocmd BufRead ~/code/Shopify/billing/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
+autocmd BufRead ~/code/billing/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
 
 " >> shopify/shopify"
-autocmd BufRead ~/code/Shopify/shopify/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
+autocmd BufRead ~/code/shopify/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
 
 
 " === MORE INVOLVED CUSTOMIZATIONS === "
@@ -210,5 +232,27 @@ function! GitGrep(...)
 endfun
 command! -nargs=? G call GitGrep(<f-args>)
 
+" Make Fugitive work with Shopify Galaxy ===============
+function! GalaxyUrl(opts, ...) abort
+  if a:0 || type(a:opts) != type({})
+    return ''
+  endif
 
+  let remote = matchlist(a:opts.remote, '\v^https:\/\/git-mirror.shopifycloud.com\/(.{-1,})(\.git)?$')
+  if empty(remote)
+    return ''
+  end
 
+  let opts = copy(a:opts)
+  let opts.remote = "https://github.com/" . remote[1] . ".git"
+  return call("rhubarb#FugitiveUrl", [opts])
+endfunction
+
+if !exists('g:fugitive_browse_handlers')
+  let g:fugitive_browse_handlers = []
+endif
+
+if index(g:fugitive_browse_handlers, function('GalaxyUrl')) < 0
+  call insert(g:fugitive_browse_handlers, function('GalaxyUrl'))
+endif
+" Galaxy fix end ======================================
