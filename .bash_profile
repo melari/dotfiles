@@ -168,7 +168,7 @@ alias russbot-server="RAILS_ENV=stagingdb USER=caleb_simpson bundle exec rails s
 
 # Platform specific Alias
 if [[ $platform == 'osx' ]]; then
-  alias vim='mvim -v'
+  alias vim='nvim'
   alias l='exa -lhgbaF --git --color-scale --color always --group-directories-first'
   alias lsize='exa -lhgbaF --git --color-scale --color always --group-directories-first --sort=size -r'
 fi

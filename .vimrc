@@ -84,8 +84,17 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'                             
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
 
+
 " ==== Autocompletion ====
-" Plug 'https://github.com/lifepillar/vim-mucomplete'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+
+
+" OLD - mucomplete, trying out deoplete for now
+"Plug 'https://github.com/lifepillar/vim-mucomplete'
+let g:deoplete#enable_at_startup = 1
 set completeopt+=menuone
 set completeopt+=noselect
 set shortmess+=c " shutoff completion message
@@ -101,10 +110,10 @@ let g:mucomplete#no_mappings = 1 " don't set any mappings, default vim ones are 
 " - uspl: spelling completion if available
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl']
-let g:mucomplete#chains.ruby = ['path', 'omni', 'keyn', 'dict', 'uspl'] "for example
+"let g:mucomplete#chains.ruby = ['path', 'keyn', 'dict', 'uspl'] " omni seems broken ATM
+let g:mucomplete#chains.ruby = ['keyn'] " omni seems broken ATM
 
 call plug#end()
-
 
 " === SYNTAX HIGHLIGHTING / EDITOR CONFIGURATION === "
 syntax on
