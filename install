@@ -1,10 +1,12 @@
 echo "Installing..."
-ln -s .vim ~/.vim
-ln -s .vimrc ~/.vimrc
-ln -s .bash_profile ~/.bash_profile
-ln -s .gitignore ~/.gitignore
-ln -s .git-completion.sh ~/.git-completion.sh
+sudo apt-get install -y fzf ripgrep
 
+cp .bash_profile ~/.bash_profile
+
+mkdir ~/.config/nvim
+cp .config/nvim/init.vim ~/.config/nvim/init.vim
+
+cp .gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 echo "Complete."
 
