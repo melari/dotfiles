@@ -110,7 +110,7 @@ nnoremap D g<c-]>|                            " Find definition of word under cu
 
 " === CUSTOM COMMANDS === "
 " :Delete           Delete current file
-command Delete :call delete(expand('%'))
+command! Delete :call delete(expand('%'))
 " :Find [pattern]   Pipe RipGrep into FZF
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
