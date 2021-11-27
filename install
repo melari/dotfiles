@@ -1,7 +1,7 @@
 echo "Installing..."
 sudo apt-get install -y fzf ripgrep
 
-cp .bash_profile ~/.bash_profile
+cp .zshrc ~/.zshrc
 
 mkdir ~/.config/nvim
 cp .config/nvim/init.vim ~/.config/nvim/init.vim
