@@ -1,0 +1,27 @@
+if git status --porcelain | grep -q .; then
+  echo "‼️  Uncommitted changes. Aborting"
+  exit 1
+fi
+
+git checkout master -q
+git pull origin master -q
+
+# Get a list of all local branches, except master
+branches=$(git branch --list | grep -v 'master' | sed 's/^[* ]*//')
+
+# Loop through each branch and perform a silent merge
+for branch in $branches; do
+  git merge --no-commit --no-ff -q $branch > /dev/null 2>&1
+
+  # Check if the merge resulted in any changes
+  if git status --porcelain | grep -q .; then
+    # Changes were introduced, meaning there are still unmerged changes
+    echo "❇️  Keeping $branch"
+    git merge --abort > /dev/null 2>&1
+  else
+    # No changes, meaning it's already merged
+    git merge --abort > /dev/null 2>&1
+    git branch -D $branch
+  fi
+
+done

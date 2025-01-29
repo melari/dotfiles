@@ -23,10 +23,16 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
 PROMPT='%F{150}%B%~%b%f%F{100}|%f$vcs_info_msg_0_%F{100}>%f '
 
+# Add ~/bin to PATH
+export PATH="$HOME/bin:$PATH"
+
 # Global
 alias ls='ls -G'
 alias ..='cd ..'
 alias vim='nvim'
+
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Rails
 alias b='bundle exec'
@@ -40,10 +46,14 @@ alias branch='git branch --color'
 alias d='git diff -v --color'
 alias st='git status'
 alias gl="git log --graph --abbrev-commit --decorate --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset %Cred%d%Creset'"
-alias branch-cleanup="echo '===== cleaning branches =====' && git branch --merged | grep -v \"\*\" | xargs -n 1 git branch -d && git remote prune origin && echo '===== done. remaining branches: =====' && branch"
-alias update-master="echo '===== updating master =====' && git checkout master && git pull origin master && dev up && branch-cleanup"
-alias rebase-latest-master="update-master && echo '===== rebasing on new master =====' && git checkout - && git rebase master && echo '===== done ====='"
+alias up="~/bin/branch-cleanup && dev setup && (dev up & overmind c)"
 
 d-single() {
   d $@^..$@
 }
+
+eval "$(dev _hook)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
