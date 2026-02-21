@@ -185,15 +185,6 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " === FILETYPE MAPPINGS === "
 autocmd BufNewFile,BufRead *Gemfile*  set filetype=ruby
 
-" === PROJECT SPECIFIC SETTINGS === "
-
-" >> shopify/billing"
-autocmd BufRead ~/code/billing/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
-
-" >> shopify/shopify"
-autocmd BufRead ~/code/shopify/* let g:syntastic_ruby_checkers = ["mri"]  " Disable rubocop
-
-
 " === MORE INVOLVED CUSTOMIZATIONS === "
 
 " Make sure pasting in visual mode doesn't replace the paste buffer
@@ -220,28 +211,3 @@ function! GitGrep(...)
   let &grepprg = save
 endfun
 command! -nargs=? G call GitGrep(<f-args>)
-
-" Make Fugitive work with Shopify Galaxy ===============
-function! GalaxyUrl(opts, ...) abort
-  if a:0 || type(a:opts) != type({})
-    return ''
-  endif
-
-  let remote = matchlist(a:opts.remote, '\v^https:\/\/git-mirror.shopifycloud.com\/(.{-1,})(\.git)?$')
-  if empty(remote)
-    return ''
-  end
-
-  let opts = copy(a:opts)
-  let opts.remote = "https://github.com/" . remote[1] . ".git"
-  return call("rhubarb#FugitiveUrl", [opts])
-endfunction
-
-if !exists('g:fugitive_browse_handlers')
-  let g:fugitive_browse_handlers = []
-endif
-
-if index(g:fugitive_browse_handlers, function('GalaxyUrl')) < 0
-  call insert(g:fugitive_browse_handlers, function('GalaxyUrl'))
-endif
-" Galaxy fix end ======================================

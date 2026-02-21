@@ -1,9 +1,31 @@
-echo "Installing..."
-sudo apt-get install -y fzf ripgrep
+#!/usr/bin/env bash
+
+echo "Checking which OS we're installing on..."
+
+OS="$(uname)"
+
+if [[ "$OS" == "Linux" ]]; then
+  echo "Detected: Linux"
+elif [[ "$OS" == "Darwin" ]]; then
+  echo "Detected: OSX"
+else
+  echo "ERROR: Unknown Operating System $OS"
+fi
+
+if [[ "$OS" == "Linux" ]]; then
+  echo ">> Installing Linux dependencies"
+  sudo apt-get install -y zsh fzf ripgrep neovim
+
+  echo ">> Changing default shell to zsh"
+  chsh -s $(which zsh)
+else
+  echo ">> Installing OSX dependencies"
+  brew install fzf ripgrep neovim
+fi
 
 cp .zshrc ~/.zshrc
 
-mkdir ~/.config/nvim
+mkdir -p ~/.config/nvim
 cp .config/nvim/init.vim ~/.config/nvim/init.vim
 
 cp .gitignore ~/.gitignore
@@ -11,3 +33,7 @@ git config --global core.excludesfile ~/.gitignore
 echo "Complete."
 
 echo "See README for final details."
+
+if [[ "$OS" == "Linux" ]]; then
+  echo "NOTE: You need to logout to pick up shell changes on linux"
+fi
