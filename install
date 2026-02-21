@@ -14,13 +14,13 @@ fi
 
 if [[ "$OS" == "Linux" ]]; then
   echo ">> Installing Linux dependencies"
-  sudo apt-get install -y zsh fzf ripgrep neovim rbenv
+  sudo apt-get install -y zsh fzf ripgrep neovim
 
   echo ">> Changing default shell to zsh"
   chsh -s $(which zsh)
 else
   echo ">> Installing OSX dependencies"
-  brew install fzf ripgrep neovim
+  brew install fzf ripgrep neovim rbenv
 fi
 
 cp .zshrc ~/.zshrc
