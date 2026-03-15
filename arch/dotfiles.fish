@@ -24,11 +24,11 @@ function draw_menu
     set nc (set_color normal)
     set sc (set_color brblack)
 
-    set controls_plain "q: quit  |  j/k: move  |  <enter>: toggle  |  r: run selected"
+    set controls_plain "q: quit  |  j/k: move  |  <enter>: toggle  |  a: select all  |  r: run selected"
     set controls_col (math --scale 0 "($cols - "(string length $controls_plain)") / 2")
 
     tput cup 3 $controls_col
-    printf '%s' $kc q $nc ": quit  " $sc "|" $nc "  " $kc "j/k" $nc ": move  " $sc "|" $nc "  " $kc "<enter>" $nc ": toggle  " $sc "|" $nc "  " $kc "r" $nc ": run selected"
+    printf '%s' $kc q $nc ": quit  " $sc "|" $nc "  " $kc "j/k" $nc ": move  " $sc "|" $nc "  " $kc "<enter>" $nc ": toggle  " $sc "|" $nc "  " $kc "a" $nc ": select all  " $sc "|" $nc "  " $kc "r" $nc ": run selected"
 
     set row 5
 
@@ -112,6 +112,9 @@ while true
             else
                 set checked $checked $selected
             end
+
+        case a
+            set checked (seq (count $scripts))
 
         case r
             if test (count $checked) -gt 0
