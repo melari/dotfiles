@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-sudo pacman -S --needed hyprlauncher waybar polkit-gnome mako; or exit $status
+sudo pacman -S --needed hyprlauncher waybar polkit-gnome mako bluez bluez-utils blueman; or exit $status
 
 mkdir -p ~/.config/hypr
 lib/safelink.fish hyprland/hyprland.conf ~/.config/hypr/hyprland.conf; or exit $status
