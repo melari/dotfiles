@@ -6,6 +6,7 @@ set scripts_dir "$script_dir/setup_scripts"
 set scripts (for f in $scripts_dir/*.fish; basename $f; end)
 
 set selected 1
+set checked
 
 function draw_menu
     clear
@@ -14,31 +15,59 @@ function draw_menu
 
     set title "Arch Dotfiles Util"
     set title_len (string length $title)
-    set title_col (math "($cols - $title_len) / 2")
+    set title_col (math --scale 0 "($cols - $title_len) / 2")
 
     tput cup 1 $title_col
     echo $title
 
-    set row 4
+    set kc (set_color yellow)
+    set nc (set_color normal)
+    set sc (set_color brblack)
+
+    set controls_plain "q: quit  |  j/k: move  |  <enter>: toggle  |  r: run selected"
+    set controls_col (math --scale 0 "($cols - "(string length $controls_plain)") / 2")
+
+    tput cup 3 $controls_col
+    printf '%s' $kc q $nc ": quit  " $sc "|" $nc "  " $kc "j/k" $nc ": move  " $sc "|" $nc "  " $kc "<enter>" $nc ": toggle  " $sc "|" $nc "  " $kc "r" $nc ": run selected"
+
+    set row 5
 
     for i in (seq (count $scripts))
         tput cup $row 4
 
-        if test $i -eq $selected
-            echo "> $scripts[$i]"
+        if contains $i $checked
+            set box "[x]"
         else
-            echo "  $scripts[$i]"
+            set box "[ ]"
+        end
+
+        if test $i -eq $selected
+            echo "> $box $scripts[$i]"
+        else
+            echo "  $box $scripts[$i]"
         end
 
         set row (math "$row + 1")
     end
 end
 
-function run_script
+function run_selected
     clear
     tput cnorm
 
-    fish -c "cd $scripts_dir; ./$scripts[$selected]"
+    for i in $checked
+        fish -c "cd $scripts_dir; ./$scripts[$i]"
+
+        if test $status -ne 0
+            echo
+            printf "Script failed, continue to next script anyway? [y/N] "
+            read --silent --nchars 1 answer
+            echo
+            if not string match -qi y $answer
+                break
+            end
+        end
+    end
 
     echo
     echo "Press any key to return..."
@@ -53,15 +82,15 @@ while true
     draw_menu
 
     read --silent --nchars 1 key
+    if test $status -ne 0
+        tput cnorm
+        clear
+        exit 0
+    end
 
     switch $key
 
         case q
-            tput cnorm
-            clear
-            exit 0
-
-	case (printf '\x03')  # Ctrl+C
             tput cnorm
             clear
             exit 0
@@ -77,7 +106,18 @@ while true
             end
 
         case ''
-            run_script
+            if contains $selected $checked
+                set -l idx (contains --index $selected $checked)
+                set -e checked[$idx]
+            else
+                set checked $checked $selected
+            end
+
+        case r
+            if test (count $checked) -gt 0
+                run_selected
+                set checked
+            end
 
         case (printf '\e')
             read --silent --nchars 2 seq

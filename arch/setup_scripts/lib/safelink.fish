@@ -13,7 +13,7 @@ if test (count $argv) -ne 2
 end
 
 set script_dir (dirname (status -f))
-set source (realpath $script_dir/../$argv[1])
+set source (realpath $script_dir/../../$argv[1])
 set target $argv[2]
 
 if test -e $target; and not test -L $target
