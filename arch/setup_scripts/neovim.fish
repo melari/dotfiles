@@ -2,4 +2,7 @@
 
 ./yay.fish; or exit $status
 
-yay -S --needed --noconfirm wl-clipboard neovim-git
+yay -S --needed --noconfirm wl-clipboard neovim-git tree-sitter-cli base-devel curl fzf ripgrep fd; or exit $status
+
+lib/safelink.fish nvim ~/.config/nvim; or exit $status
+

@@ -22,7 +22,7 @@ if test -e $target; and not test -L $target
   echo "⚠️ $target is being overwritten! A backup is available at $target.backup"
 end
 
-if test -e $target
+if test -L $target
   if test "$argv[3]" = "true"
     exit 2
   else
