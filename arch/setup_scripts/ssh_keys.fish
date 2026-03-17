@@ -4,6 +4,8 @@
 
 mkdir -p ~/.ssh
 
+lib/safelink.fish ssh/config ~/.ssh/config; or exit $status
+
 # import_key(1password_name, file_name)
 function import_key
     set item_name $argv[1]
