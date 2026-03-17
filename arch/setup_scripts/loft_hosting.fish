@@ -2,6 +2,7 @@
 
 # Fish setup required to ensure ~/.local/bin is available
 ./fish.fish; or exit $status
+./ssh_keys.fish; or exit $status
 
 set target ~/.local/bin/loft-hosting
 
@@ -13,4 +14,3 @@ end
 curl -L https://loft.hosting/downloads/linux/loft-hosting -o $target
 
 chmod +x $target
-
