@@ -1,7 +1,14 @@
 #!/usr/bin/env fish
 
 set script_dir (dirname (status -f))
-set scripts_dir "$script_dir/setup_scripts"
+
+if test (uname) = Darwin
+    set os_name OSX
+    set scripts_dir "$script_dir/osx/setup_scripts"
+else
+    set os_name Linux
+    set scripts_dir "$script_dir/arch/setup_scripts"
+end
 
 set scripts (for f in $scripts_dir/*.fish; basename $f; end)
 
@@ -13,7 +20,7 @@ function draw_menu
 
     set cols (tput cols)
 
-    set title "Arch Dotfiles Util"
+    set title "Dotfiles Util - $os_name"
     set title_len (string length $title)
     set title_col (math --scale 0 "($cols - $title_len) / 2")
 
@@ -28,7 +35,7 @@ function draw_menu
     set controls_col (math --scale 0 "($cols - "(string length $controls_plain)") / 2")
 
     tput cup 3 $controls_col
-    printf '%s' $kc q $nc ": quit  " $sc "|" $nc "  " $kc "j/k" $nc ": move  " $sc "|" $nc "  " $kc "<enter>" $nc ": toggle  " $sc "|" $nc "  " $kc "a" $nc ": select all  " $sc "|" $nc "  " $kc "r" $nc ": run selected"
+    printf '%s' $kc q $nc ": quit  " $sc "|" $nc "  " $kc j/k $nc ": move  " $sc "|" $nc "  " $kc "<enter>" $nc ": toggle  " $sc "|" $nc "  " $kc a $nc ": select all  " $sc "|" $nc "  " $kc r $nc ": run selected"
 
     set row 5
 
@@ -113,6 +120,10 @@ while true
                 set checked $checked $selected
             end
 
+            if test $selected -lt (count $scripts)
+                set selected (math "$selected + 1")
+            end
+
         case a
             set checked (seq (count $scripts))
 
@@ -137,3 +148,4 @@ while true
             end
     end
 end
+
