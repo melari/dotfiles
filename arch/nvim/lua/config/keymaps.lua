@@ -27,6 +27,17 @@ map("v", ".", ":norm .<cr>", { desc = "Execute last command over selection" })
 map("v", "<leader>#", ":norm I#<cr>", { desc = "Comment selected lines" })
 map("v", "<leader>4", ":norm x<cr>", { desc = "Uncomment selected lines" })
 
+-- Make sure pasting in visual mode doesn't replace the paste buffer
+local _restore_reg = ""
+_G._RestoreRegister = function()
+  vim.fn.setreg('"', _restore_reg)
+  return ""
+end
+map("v", "p", function()
+  _restore_reg = vim.fn.getreg('"')
+  return "p@=v:lua._RestoreRegister()\r"
+end, { silent = true, expr = true, desc = "Paste without overwriting register" })
+
 -- === Claude mappings ===
 map("n", "<C-a>", "<leader>ac", { remap = true, desc = "Toggle Claude" })
 map("n", "<C-y>", "<leader>aa", { remap = true, desc = "Accept Diff from Claude" })
