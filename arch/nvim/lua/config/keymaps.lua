@@ -45,11 +45,6 @@ map("n", "<C-n>", "<leader>ad", { remap = true, desc = "Reject Diff from Claude"
 map("n", "<C-s>", "<leader>ab", { remap = true, desc = "Send file to claude" })
 map("v", "<C-s>", "<leader>as", { remap = true, desc = "Send selection to Claude" })
 
--- Grep (same as <leader>/ but supports exclusion via: pattern -- -v exclude-text)
-map("n", "<C-r>", function()
-  Snacks.picker.grep()
-end, { desc = "Grep (supports -- -v exclusion)" })
-
 -- === Custom commands ===
 vim.api.nvim_create_user_command("Delete", function()
   local path = vim.fn.expand("%:p")

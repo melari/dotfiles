@@ -8,6 +8,9 @@ if not set -q SSH_AGENT_PID
     ssh-agent -c | source >/dev/null 2>&1
 end
 
+# Make sure rbenv is initialized, if abailable
+status --is-interactive; and type -q rbenv; and rbenv init - --no-rehash fish | source
+
 # Include ~/.local/bin in the PATH
 set -gx PATH $HOME/.local/bin $PATH
 
