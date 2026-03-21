@@ -1,3 +1,3 @@
 #!/usr/bin/env fish
 
-sudo pacman -S --needed --noconfirm spotify-launcher
+sudo pacman -Syu --needed --noconfirm spotify-launcher

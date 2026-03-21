@@ -1,3 +1,3 @@
 #!/usr/bin/env fish
 
-sudo pacman -S --needed --noconfirm brave-browser
+sudo pacman -Syu --needed --noconfirm brave-browser
