@@ -16,3 +16,10 @@ set -gx PATH $HOME/.local/bin $PATH
 
 # === Aliases ===
 alias vim nvim
+alias d "git diff -v --color"
+alias st "git status"
+alias gl "git log --graph --abbrev-commit --decorate --pretty=format:'%Cgreen%h %Cred%an%Creset: %s %Cblue(%cr)%Creset %Cred%d%Creset'"
+
+function d-single
+    d $argv[1]^..$argv[1]
+end
