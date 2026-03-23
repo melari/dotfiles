@@ -39,7 +39,7 @@ map("v", "p", function()
 end, { silent = true, expr = true, desc = "Paste without overwriting register" })
 
 -- === Claude mappings ===
-map("n", "<C-a>", "<leader>ac", { remap = true, desc = "Toggle Claude" })
+map("n", "<C-a>", "<leader>af", { remap = true, desc = "Open/focus Claude" })
 map("n", "<C-y>", "<leader>aa", { remap = true, desc = "Accept Diff from Claude" })
 map("n", "<C-n>", "<leader>ad", { remap = true, desc = "Reject Diff from Claude" })
 map("n", "<C-s>", "<leader>ab", { remap = true, desc = "Send file to claude" })
