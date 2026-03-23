@@ -81,6 +81,7 @@ function run_selected
     read --silent --nchars 1
 
     tput civis
+    clear
 end
 
 tput civis

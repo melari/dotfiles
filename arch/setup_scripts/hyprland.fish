@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+./kitty.fish; or exit $status
+
 sudo pacman -Syu --needed --noconfirm hyprlauncher waybar polkit-gnome mako bluez bluez-utils blueman network-manager-applet; or exit $status
 
 mkdir -p ~/.config/hypr

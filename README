@@ -1,0 +1,7 @@
+# Usage
+
+Main entrypoint for the configuration util:
+`./dotfiles.fish`
+
+If `fish` shell is not available yet, you can use the bootstrap command:
+`./bootstrap.sh`

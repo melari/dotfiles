@@ -1,0 +1,1 @@
+../../../arch/setup_scripts/lib/safelink.fish
