@@ -16,7 +16,7 @@ set selected 1
 set checked
 
 function draw_menu
-    clear
+    tput cup 0 0
 
     set cols (tput cols)
 
@@ -84,6 +84,7 @@ function run_selected
 end
 
 tput civis
+clear
 
 while true
     draw_menu
@@ -148,4 +149,3 @@ while true
             end
     end
 end
-
