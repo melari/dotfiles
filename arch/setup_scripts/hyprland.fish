@@ -2,10 +2,12 @@
 
 ./kitty.fish; or exit $status
 
-sudo pacman -Syu --needed --noconfirm hyprlauncher waybar polkit-gnome mako bluez bluez-utils blueman network-manager-applet; or exit $status
+sudo pacman -Syu --needed --noconfirm hyprlauncher waybar polkit-gnome mako bluez bluez-utils blueman network-manager-applet hyprpaper; or exit $status
 
 mkdir -p ~/.config/hypr
 lib/safelink.fish hyprland/hyprland.conf ~/.config/hypr/hyprland.conf; or exit $status
+lib/safelink.fish hyprland/hyprpaper.conf ~/.config/hypr/hyprpaper.conf; or exit $status
+lib/safelink.fish ../wallpapers/ascii-tree.png ~/.config/hypr/wallpaper.png; or exit $status
 
 mkdir -p ~/.config/waybar
 lib/safelink.fish waybar/config.jsonc ~/.config/waybar/config.jsonc; or exit $status
