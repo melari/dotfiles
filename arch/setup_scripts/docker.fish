@@ -12,4 +12,4 @@ echo ""
 echo "👉 Docker is now installed, but usually requires a reboot after installing."
 echo "<< Press any key to continue (with install, not restart) >>"
 echo ""
-read --silent --nchars 1
+read --silent --nchars 1 -P ""

@@ -68,7 +68,7 @@ function run_selected
         if test $status -ne 0
             echo
             printf "Script failed, continue to next script anyway? [y/N] "
-            read --silent --nchars 1 answer
+            read -P "" --silent --nchars 1 answer
             echo
             if not string match -qi y $answer
                 break
@@ -78,7 +78,7 @@ function run_selected
 
     echo
     echo "Press any key to return..."
-    read --silent --nchars 1
+    read --silent --nchars 1 -P ""
 
     tput civis
     clear
@@ -90,7 +90,7 @@ clear
 while true
     draw_menu
 
-    read --silent --nchars 1 key
+    read --silent --nchars 1 key -P ""
     if test $status -ne 0
         tput cnorm
         clear
@@ -136,7 +136,7 @@ while true
             end
 
         case (printf '\e')
-            read --silent --nchars 2 seq
+            read --silent --nchars 2 seq -P ""
 
             switch $seq
                 case '[A'
