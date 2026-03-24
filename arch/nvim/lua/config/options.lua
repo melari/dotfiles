@@ -7,5 +7,7 @@ vim.opt.clipboard = "" -- dont use the system clipboard for everything
 vim.opt.number = true -- show line numberS
 vim.opt.relativenumber = false -- use absolute line numbers
 
+vim.opt.winbar = "%f" -- show filename in each split pane
+
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
