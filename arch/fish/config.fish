@@ -14,6 +14,9 @@ status --is-interactive; and type -q rbenv; and rbenv init - --no-rehash fish | 
 # Include ~/.local/bin in the PATH
 set -gx PATH $HOME/.local/bin $PATH
 
+# Make sure npm only installs binaries to the local user
+export npm_config_prefix="$HOME/.local"
+
 # === Aliases ===
 alias vim nvim
 alias d "git diff -v --color"
