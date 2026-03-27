@@ -36,3 +36,23 @@ tooltip label {
   padding: 5px;
   background-color: #131822;
 }
+
+#workspaces button {
+  all: initial;
+  min-width: 0;
+  padding: 1px 8px;
+  margin: 1px 1px;
+  border-radius: 4px;
+  background-color: #1e1e3e;
+  color: #9da6f4;
+}
+
+#workspaces button.active {
+  background-color: #2e2e5e;
+  color: #cdd6f4;
+}
+
+#workspaces button:hover {
+  background-color: #2a2a4e;
+  color: #cdd6f4;
+}
