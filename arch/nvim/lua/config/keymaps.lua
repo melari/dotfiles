@@ -46,6 +46,29 @@ map("n", "<C-s>", "<leader>ab", { remap = true, desc = "Send file to claude" })
 map("v", "<C-s>", "<leader>as", { remap = true, desc = "Send selection to Claude" })
 
 -- === Custom commands ===
+vim.api.nvim_create_user_command("Gblame", "Gitsigns blame", { desc = "Git blame for current file" })
+
+vim.api.nvim_create_user_command("Gbrowse", function(opts)
+  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+  local remote = vim.fn.systemlist("git remote get-url origin")[1]
+  local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
+  local filepath = vim.fn.expand("%:p")
+  local relpath = filepath:sub(#git_root + 2)
+
+  -- Convert git remote URL to https
+  local url = remote:gsub("git@github%.com:", "https://github.com/"):gsub("%.git$", "")
+  url = url .. "/blob/" .. branch .. "/" .. relpath
+
+  -- Add line range
+  if opts.range == 2 then
+    url = url .. "#L" .. opts.line1 .. "-L" .. opts.line2
+  else
+    url = url .. "#L" .. vim.fn.line(".")
+  end
+
+  vim.fn.system({ "open", url })
+end, { range = true, desc = "Open current file on GitHub" })
+
 vim.api.nvim_create_user_command("Delete", function()
   local path = vim.fn.expand("%:p")
   if path == "" then
