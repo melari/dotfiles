@@ -3,3 +3,10 @@ Host github.com
     User git
     IdentityFile ~/.ssh/github-shared
     IdentitiesOnly yes
+
+Host ottawa.regions.loft.hosting
+    HostName ottawa.regions.loft.hosting
+    User caleb
+    Port 20022
+    IdentityFile ~/.ssh/loft-hosting-ottawa
+    IdentitiesOnly yes
