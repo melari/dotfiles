@@ -22,6 +22,9 @@ map("n", "<Down>", "<C-w>+", { desc = "Decrease window height" })
 -- Associated plugin definition: plugins/fzf.lua
 map("n", "<C-f>", ":Rg<CR>", { remap = true, desc = "Open Ripgrep" })
 
+-- === Terminal mode mappings ===
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- === Visual mode mappings ===
 map("v", ".", ":norm .<cr>", { desc = "Execute last command over selection" })
 map("v", "<leader>#", ":norm I#<cr>", { desc = "Comment selected lines" })
