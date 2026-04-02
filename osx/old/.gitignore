@@ -3,7 +3,6 @@
 .DS_Store
 .svn
 .rvmrc
-tags
 .vim/plugged
 .byebug_history
 .starscope.db
