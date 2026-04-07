@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Wrapper for claudecode.nvim terminal_cmd.
+# Explicitly passes claudecode env vars into the tmux session so that when
+# multiple nvim instances are open, each claude connects to the correct nvim
+# (tmux server caches its own env, so new-session would otherwise inherit the
+# first nvim's CLAUDE_CODE_SSE_PORT).
+exec tmux new-session \
+  -e CLAUDE_CODE_SSE_PORT="$CLAUDE_CODE_SSE_PORT" \
+  -e ENABLE_IDE_INTEGRATION="$ENABLE_IDE_INTEGRATION" \
+  -e FORCE_CODE_TERMINAL="$FORCE_CODE_TERMINAL" \
+  claude

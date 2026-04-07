@@ -4,7 +4,6 @@
 return {
   "coder/claudecode.nvim",
   opts = {
-    terminal_cmd = "tmux new-session claude",
+    terminal_cmd = vim.fn.stdpath("config") .. "/scripts/claude-tmux",
   },
 }
-
