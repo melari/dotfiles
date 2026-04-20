@@ -9,5 +9,7 @@ vim.opt.relativenumber = false -- use absolute line numbers
 
 vim.opt.winbar = "%f" -- show filename in each split pane
 
+vim.g.autoformat = false
+
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
