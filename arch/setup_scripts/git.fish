@@ -4,3 +4,4 @@
 # Here we just configure it a bit.
 
 git config --global core.editor "vim"
+git config --global merge.conflictstyle zdiff3
