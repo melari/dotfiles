@@ -41,12 +41,10 @@ map("v", "p", function()
   return "p@=v:lua._RestoreRegister()\r"
 end, { silent = true, expr = true, desc = "Paste without overwriting register" })
 
--- === Claude mappings ===
-map("n", "<C-a>", "<leader>af", { remap = true, desc = "Open/focus Claude" })
-map("n", "<C-y>", "<leader>aa", { remap = true, desc = "Accept Diff from Claude" })
-map("n", "<C-n>", "<leader>ad", { remap = true, desc = "Reject Diff from Claude" })
-map("n", "<C-s>", "<leader>ab", { remap = true, desc = "Send file to claude" })
-map("v", "<C-s>", "<leader>as", { remap = true, desc = "Send selection to Claude" })
+-- === Sidekick mappings ===
+map({ "n", "t", "i", "x" }, "<leader><C-a>", function() require("sidekick.cli").focus() end, { desc = "Prompt for which AI tool to use" })
+map({ "n", "t", "i", "x" }, "<C-a>", function() require("sidekick.cli").focus({ name = "codex" }) end, { desc = "Open/focus daily driver AI panel" })
+map({ "n", "x" }, "<C-s>", function() require("sidekick.cli").send({ msg = "{this}" }) end, { desc = "Send this to Sidekick" })
 
 -- === Custom commands ===
 vim.api.nvim_create_user_command("Gblame", "Gitsigns blame", { desc = "Git blame for current file" })
