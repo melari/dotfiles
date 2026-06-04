@@ -59,6 +59,7 @@ function draw_menu
 end
 
 function run_selected
+    stty echo
     clear
     tput cnorm
 
@@ -80,10 +81,12 @@ function run_selected
     echo "Press any key to return..."
     read --silent --nchars 1 -P ""
 
+    stty -echo
     tput civis
     clear
 end
 
+stty -echo
 tput civis
 clear
 
@@ -92,6 +95,7 @@ while true
 
     read --silent --nchars 1 key -P ""
     if test $status -ne 0
+        stty echo
         tput cnorm
         clear
         exit 0
@@ -100,6 +104,7 @@ while true
     switch $key
 
         case q
+            stty echo
             tput cnorm
             clear
             exit 0
