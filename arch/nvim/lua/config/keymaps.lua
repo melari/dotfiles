@@ -43,7 +43,7 @@ end, { silent = true, expr = true, desc = "Paste without overwriting register" }
 
 -- === Sidekick mappings ===
 map({ "n", "t", "i", "x" }, "<leader><C-a>", function() require("sidekick.cli").focus() end, { desc = "Prompt for which AI tool to use" })
-map({ "n", "t", "i", "x" }, "<C-a>", function() require("sidekick.cli").focus({ name = "codex" }) end, { desc = "Open/focus daily driver AI panel" })
+map({ "n", "t", "i", "x" }, "<C-a>", function() require("sidekick.cli").focus({ name = "claude" }) end, { desc = "Open/focus daily driver AI panel" })
 map({ "n", "x" }, "<C-s>", function() require("sidekick.cli").send({ msg = "{this}" }) end, { desc = "Send this to Sidekick" })
 
 -- === Custom commands ===
