@@ -1,0 +1,24 @@
+[0;1;32m●[0m avahi-daemon.service - Avahi mDNS/DNS-SD Stack
+     Loaded: loaded (]8;;file://thicctop/usr/lib/systemd/system/avahi-daemon.service\/usr/lib/systemd/system/avahi-daemon.service]8;;\; [0;1;32menabled[0m; preset: [0;1;38:5:185mdisabled[0m)
+     Active: [0;1;32mactive (running)[0m since Wed 2026-06-10 09:21:54 EDT; 1h 28min ago
+ Invocation: b540011ccde64d5da7a4603309556a66
+TriggeredBy: [0;1;32m●[0m avahi-daemon.socket
+   Main PID: 621 (avahi-daemon)
+     Status: "[0;1;36mavahi-daemon 0.9-rc4 starting up.[0m"
+      Tasks: 2[0;38:5:245m (limit: 38128)[0m
+     Memory: 1.7M (peak: 3.7M)
+        CPU: 463ms
+     CGroup: /system.slice/avahi-daemon.service
+             ├─[0;38:5:245m621 "avahi-daemon: running [thicctop.local]"[0m
+             └─[0;38:5:245m647 "avahi-daemon: chroot helper"[0m
+
+Jun 10 10:10:15 thicctop avahi-daemon[621]: Registering new address record for 192.168.1.141 on wlan0.IPv4.
+Jun 10 10:10:15 thicctop avahi-daemon[621]: Withdrawing address record for 192.168.1.141 on wlan0.
+Jun 10 10:10:15 thicctop avahi-daemon[621]: Leaving mDNS multicast group on interface wlan0.IPv4 with address 192.168.1.141.
+Jun 10 10:10:15 thicctop avahi-daemon[621]: Interface wlan0.IPv4 no longer relevant for mDNS.
+Jun 10 10:14:24 thicctop avahi-daemon[621]: Joining mDNS multicast group on interface wlan0.IPv4 with address 192.168.1.141.
+Jun 10 10:14:24 thicctop avahi-daemon[621]: New relevant interface wlan0.IPv4 for mDNS.
+Jun 10 10:14:24 thicctop avahi-daemon[621]: Registering new address record for 192.168.1.141 on wlan0.IPv4.
+Jun 10 10:14:25 thicctop avahi-daemon[621]: Joining mDNS multicast group on interface wlan0.IPv6 with address fe80::4752:3c1a:1b94:3642.
+Jun 10 10:14:25 thicctop avahi-daemon[621]: New relevant interface wlan0.IPv6 for mDNS.
+Jun 10 10:14:25 thicctop avahi-daemon[621]: Registering new address record for fe80::4752:3c1a:1b94:3642 on wlan0.*.
