@@ -1,0 +1,6 @@
+[Unit]
+Description=Update power profile
+
+[Service]
+Type=oneshot
+ExecStart=/home/caleb/.local/bin/update-power-profile

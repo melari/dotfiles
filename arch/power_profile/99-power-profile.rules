@@ -1,0 +1,1 @@
+SUBSYSTEM=="power_supply", KERNEL=="ACAD", ACTION=="change", TAG+="systemd", ENV{SYSTEMD_WANTS}="update-power-profile.service"

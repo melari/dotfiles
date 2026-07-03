@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(cat /sys/class/power_supply/ACAD/online)" = "1" ]; then
+    /usr/bin/powerprofilesctl set performance
+else
+    /usr/bin/powerprofilesctl set power-saver
+fi
