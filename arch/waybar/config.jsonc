@@ -8,20 +8,19 @@
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
-        "hyprland/submap",
-        "custom/media"
+        //"hyprland/submap",
+        //"custom/media"
+        "cpu",
+        "memory",
+        "temperature",
+        "power-profiles-daemon",
+        "idle_inhibitor",
     ],
     "modules-center": [
         "hyprland/window"
     ],
     "modules-right": [
-        "idle_inhibitor",
         "pulseaudio",
-        "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
         "keyboard-state",
         "battery",
         "battery#bat2",
@@ -81,17 +80,22 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I:%M %p}",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%Y-%m-%d | %I:%M %p}",
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip":true,
+        "states": {
+          "warning": 60,
+          "critical": 90
+        }
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ⛁",
+        "tooltip": true,
     },
     "temperature": {
+        "tooltip": false,
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
@@ -112,8 +116,8 @@
         },
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% {icon} ⚡︎",
+        "format-plugged": "{capacity}% {icon} ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
@@ -135,20 +139,20 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": "X {icon} {format_source}",
-        "format-muted": "X {format_source}",
+        "format": "{volume}% {icon}  {format_source}",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
+        "format-bluetooth-muted": "---MUTED--- {icon}  {format_source}",
+        "format-muted": "---MUTED--- {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", "", " "]
         },
         "on-click": "pavucontrol"
     },

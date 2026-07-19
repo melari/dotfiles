@@ -1,3 +1,31 @@
+@define-color rosewater #f4dbd6;
+@define-color flamingo #f0c6c6;
+@define-color pink #f5bde6;
+@define-color mauve #c6a0f6;
+@define-color red #ed8796;
+@define-color maroon #ee99a0;
+@define-color peach #f5a97f;
+@define-color yellow #eed49f;
+@define-color green #a6da95;
+@define-color teal #8bd5ca;
+@define-color sky #91d7e3;
+@define-color sapphire #7dc4e4;
+@define-color blue #8aadf4;
+@define-color lavender #b7bdf8;
+@define-color text #cad3f5;
+@define-color subtext1 #b8c0e0;
+@define-color subtext0 #a5adcb;
+@define-color overlay2 #939ab7;
+@define-color overlay1 #8087a2;
+@define-color overlay0 #6e738d;
+@define-color surface2 #5b6078;
+@define-color surface1 #494d64;
+@define-color surface0 #363a4f;
+@define-color base #24273a;
+@define-color mantle #1e2030;
+@define-color crust #181926;
+
+
 * {
   border: none;
   border-radius: 0;
@@ -6,24 +34,20 @@
   font-size: 10px;
 }
 
-window#waybar {
+#waybar {
   background: transparent;
-  /*
-  background-color: #181825;
-  transition-property: background-color;
-  transition-duration: 0.5s;
-  */
+  color: @text;
+  margin: 0px 100px;
 }
 
 .module {
   all: initial;
   min-width: 0;
   box-shadow: inset 0 -3px transparent;
-  padding: 1px 8px;
-  margin: 1px 1px;
-  border-radius: 4px;
-  background-color: #1e1e3e;
-  color: #9da6f4;
+  border-radius: 1rem;
+  background-color: @surface0;
+  padding: 0px 1rem;
+  margin: 5px 0;
 }
 
 tooltip {
@@ -37,22 +61,97 @@ tooltip label {
   background-color: #131822;
 }
 
+#workspaces {
+  border-radius: 1rem;
+  background-color: @surface0;
+  margin-left: 1rem;
+  padding: 0px 3px;
+}
+
 #workspaces button {
   all: initial;
   min-width: 0;
-  padding: 1px 8px;
   margin: 1px 1px;
-  border-radius: 4px;
-  background-color: #1e1e3e;
-  color: #9da6f4;
+  padding: 0.4rem;
+  background:none;
+  color: @lavender;
+  border-radius: 1rem;
 }
 
 #workspaces button.active {
-  background-color: #2e2e5e;
-  color: #cdd6f4;
+  background-color: @sapphire;
+  color: #000;
+  border-radius: 1rem;
 }
 
 #workspaces button:hover {
-  background-color: #2a2a4e;
-  color: #cdd6f4;
+  background-color: @sapphire;
+  color: #000;
+  border-radius: 1rem;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#backlight, #battery {
+    border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#tray {
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+#power-profiles-daemon.performance {
+  color: @red;
+}
+
+#power-profiles-daemon.power-saver {
+  color: @green;
+}
+
+#idle_inhibitor {
+  padding-right: 22px;
+}
+
+#idle_inhibitor.activated {
+  font-size: 20px;
+  color: @red;
+}
+
+#cpu.warning {
+  color: @yellow;
+}
+
+#cpu.critical {
+  color: @red;
+}
+
+#temperature.critical {
+  color: @red;
 }
