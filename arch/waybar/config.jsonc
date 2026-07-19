@@ -17,7 +17,6 @@
         "idle_inhibitor",
     ],
     "modules-center": [
-        "hyprland/window"
     ],
     "modules-right": [
         "pulseaudio",
