@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set script_dir (dirname (status -f))
+set script_dir (dirname (realpath (status -f)))
 
 if test (uname) = Darwin
     set os_name OSX
@@ -10,7 +10,22 @@ else
     set scripts_dir "$script_dir/arch/setup_scripts"
 end
 
+set favourites package_updates.fish
+
 set scripts (for f in $scripts_dir/*.fish; basename $f; end)
+
+set ordered
+for fav in $favourites
+    if contains $fav $scripts
+        set ordered $ordered $fav
+    end
+end
+for s in $scripts
+    if not contains $s $favourites
+        set ordered $ordered $s
+    end
+end
+set scripts $ordered
 
 set selected 1
 set checked
