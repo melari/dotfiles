@@ -5,3 +5,5 @@
 
 git config --global core.editor "vim"
 git config --global merge.conflictstyle zdiff3
+git config --global user.email "caleb@simpson.center"
+git config --global user.name "Caleb"
