@@ -1,0 +1,22 @@
+-- Workspace rules
+-- https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+--
+-- Workspaces 1-10 are plain, unpinned and shared across monitors; the binds in
+-- binds.lua are all this setup needs. The named `gaming` workspace is created
+-- on demand by the rules in windowrules.lua.
+
+-- "Smart gaps" / "No gaps when only" — uncomment all if you wish to use that.
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
+-- hl.window_rule({
+--     name  = "no-gaps-wtv1",
+--     match = { float = false, workspace = "w[tv1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+-- hl.window_rule({
+--     name  = "no-gaps-f1",
+--     match = { float = false, workspace = "f[1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
