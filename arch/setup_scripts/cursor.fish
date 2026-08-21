@@ -7,12 +7,17 @@
 # vars in ~/.config/uwsm/env, an ~/.icons/default override, a vendored (unowned,
 # never-updated) theme copy in ~/.local/share/icons, and the GTK/gsettings keys.
 #
-# The vendored copy is deliberately left in place -- nothing reads it once the
-# theme below is set, and it costs a few MB to keep around as a fallback.
+# The vendored copy is left in place, but it is not inert: it is the only
+# hyprcursor theme on the system, and libhyprcursor happily falls back to "first
+# theme with a manifest.hl" when the requested one has no hyprcursors/ directory
+# -- which is how it kept coming back after every reboot. environment.lua sets
+# cursor:enable_hyprcursor = false to close that path off, so the copy now only
+# costs a few MB.
 #
 # This script makes the dotfiles authoritative instead. To change themes, set
 # the two variables below and the matching hl.env calls in
-# hyprland/config/environment.lua, then re-run.
+# hyprland/config/environment.lua, then re-run. A theme that ships hyprcursors/
+# can also drop the enable_hyprcursor line there.
 
 set cursor_theme Adwaita
 set cursor_size 24
