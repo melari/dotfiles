@@ -1,6 +1,7 @@
 #!/usr/bin/env fish
 
 ./kitty.fish; or exit $status
+./cursor.fish; or exit $status
 
 sudo pacman -Syu --needed --noconfirm hyprlauncher waybar polkit-gnome mako bluez bluez-utils blueman network-manager-applet hyprpaper hyprlock hyprpicker swayidle udiskie btop; or exit $status
 
