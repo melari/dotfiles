@@ -4,6 +4,9 @@
 ./fish.fish; or exit $status
 ./ssh_keys.fish; or exit $status
 
+mkdir -p ~/.loft-hosting
+lib/safelink.fish loft-hosting/loft-hosting.conf ~/.loft-hosting/loft-hosting.conf
+
 set target ~/.local/bin/loft-hosting
 
 if test -f $target
