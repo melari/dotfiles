@@ -57,10 +57,14 @@ local function zoom_by(delta)
     hl.config({ cursor = { zoom_factor = target } })
 end
 
-hl.bind(mainMod .. " + Minus",   function() zoom_by(-0.3) end, { repeating = true })
-hl.bind(mainMod .. " + Plus",    function() zoom_by(0.3)  end, { repeating = true })
-hl.bind(mainMod .. " + code:82", function() zoom_by(-0.3) end, { repeating = true }) -- keypad -
-hl.bind(mainMod .. " + code:86", function() zoom_by(0.3)  end, { repeating = true }) -- keypad +
+-- Binds match the unshifted keysym, so zoom in is SHIFT + Minus rather than
+-- Plus: `Plus` never matches on a us layout (that key reports `equal`), and
+-- SUPER + SHIFT + Equal is the laptop panel's "turn back on" below.
+-- hl.bind takes keysyms only; a "code:82" style key silently binds nothing.
+hl.bind(mainMod .. " + Minus",         function() zoom_by(-0.3) end, { repeating = true })
+hl.bind(mainMod .. " + SHIFT + Minus", function() zoom_by(0.3)  end, { repeating = true })
+hl.bind(mainMod .. " + KP_Subtract",   function() zoom_by(-0.3) end, { repeating = true })
+hl.bind(mainMod .. " + KP_Add",        function() zoom_by(0.3)  end, { repeating = true })
 
 ------------------------------
 ---- WORKSPACES & MONITORS ---
@@ -80,9 +84,27 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
--- Toggle the laptop panel off/on, e.g. when docked
-hl.bind(mainMod .. " + Equal",         hl.dsp.exec_cmd("hyprctl keyword monitor 'eDP-1,disable'"))
-hl.bind(mainMod .. " + SHIFT + Equal", hl.dsp.exec_cmd("hyprctl keyword monitor 'eDP-1,preferred,auto,1.2'"))
+-- Turn the laptop panel off/on, e.g. when docked.
+-- `hyprctl keyword` is a no-op under the Lua parser, so drive hl.monitor
+-- directly. Specs merge into the monitor's current state, which means
+-- `disabled` has to be set explicitly in both directions.
+local function set_laptop_panel(disabled)
+    local spec = {}
+
+    for key, value in pairs(LAPTOP_PANEL) do
+        spec[key] = value
+    end
+
+    spec.disabled = disabled
+    hl.monitor(spec)
+end
+
+local function laptop_panel_is_on()
+    return hl.get_monitor(LAPTOP_PANEL.output) ~= nil
+end
+
+hl.bind(mainMod .. " + Equal",         function() set_laptop_panel(laptop_panel_is_on()) end)
+hl.bind(mainMod .. " + SHIFT + Equal", function() set_laptop_panel(false) end) -- always back on
 
 ---------------------------
 ---- HARDWARE CONTROLS ----

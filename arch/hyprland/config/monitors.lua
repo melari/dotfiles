@@ -2,13 +2,8 @@
 -- Run `hyprctl monitors` to find output names and descriptions.
 -- Anything not listed here falls back to Hyprland's preferred/auto defaults.
 
--- Laptop built-in display
-hl.monitor({
-    output   = "eDP-1",
-    mode     = "preferred",
-    position = "auto",
-    scale    = 1.2,
-})
+-- Laptop built-in display (spec lives in variables.lua; binds.lua toggles it)
+hl.monitor(LAPTOP_PANEL)
 
 -- LG desk monitor
 hl.monitor({
